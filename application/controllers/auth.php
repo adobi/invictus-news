@@ -16,7 +16,7 @@ class Auth extends MY_Controller
         $data = array();
         
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|callback_check_credentials');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_credentials');
         
         if ($this->form_validation->run()) {
 			

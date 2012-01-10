@@ -109,6 +109,10 @@ class Rumor extends MY_Controller
                 }
             }
             
+            /*
+                TODO delete files from uploads/original which are not in db
+            */
+            
             $this->session->set_userdata('rumor_edited', true);
             
             redirect($_SERVER['HTTP_REFERER']);

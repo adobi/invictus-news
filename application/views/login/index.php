@@ -1,28 +1,27 @@
 
-<?php echo form_open() ?>
+<?php if (validation_errors()): ?>
+    <div class="alert-message block-message error">
+        <?php echo validation_errors() ?>
+    </div>
+<?php endif ?>
+<?php echo form_open('', array('class'=>'horizontal-form')) ?>
         
-	<fieldset style="margin-top:20px;">
-	    <legend>Bejelentkezés</legend>
+	    <legend>Please login</legend>
     
-        <?php if (validation_errors()): ?>
-            <div class="alert-message block-message error">
-                <?php echo validation_errors() ?>
+        <fieldset class="control-group">
+            <label class="control-label" for="name">Name</label>
+            <div class="controls">
+			    <input type="text" name="username" id="username" class="username" />
             </div>
-        <?php endif ?>
-		<div class="clearfix">
-			<label>Felhasználónév</label>
-			<div class="input">
-			  <input type="text" name="username" id="username" class="username" />
-			</div>
-		</div>		
-		<div class="clearfix">
-			<label>Jelszó</label>
-			<div class="input">
-			  <input type="password" name="password" id="password" class="password" />
-			</div>
-		</div>		
-		<div class="actions">
-			<input type="submit" value="Belépés" class="btn primary">
-		</div>  		
-	</fieldset>
+        </fieldset>
+        <fieldset class="control-group">
+            <label class="control-label" for="password">Password</label>
+            <div class="controls">
+			    <input type="password" name="password" id="password" class="password" />
+            </div>
+        </fieldset>
+        <fieldset class="form-actions">
+            <input type="submit" value="Login" class="btn primary">
+        </fieldset> 
+
 <?php echo form_close() ?>
