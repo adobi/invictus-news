@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>   
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>RoyalSlider - Touch-Based Image and Content Slider</title>
+	<meta name="description" content="RoyalSlider is a image gallery and content slider plugin with touch navigation on mobile and desktop devices.">
+	<meta name="keywords" content="royalslider, image gallery, image slider, image gallery, jquery slider, image slider, content slider, mobile slider, mobile gallery, touch slider, touch gallery" />
+	<meta name="author" content="Dmitry Semenov">
+	<meta property="og:title" content="RoyalSlider - Touch-Based Image and Content Slider" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="http://dimsemenov.com/plugins/royal-slider-wp/" />
+	<meta property="og:image" content="http://dimsemenov.com/plugins/royal-slider-wp/img/royalslider-og.png" />
+	<meta property="og:site_name" content="dimsemenov.com" />
+	<meta property="og:locale" content="en_us" />
+	<meta property="fb:admins" content="100000046958008" />
+	
+ 
+	
+	<meta name="viewport" content="maximum-scale=1,user-scalable=yes,width=960" >
+	
+	<link rel="stylesheet" href="css/royalslider.css" />
+	<link rel="stylesheet" href="css/default.css" />
+	<link rel="stylesheet" href="css/iskin.css" />
+	
+	<link rel="stylesheet" href="css/royalslider-preview.css" />
+	
+	<link rel="stylesheet" href="js/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>     -->
+	 
+	 
+	<script src="http://yandex.st/jquery/easing/1.3/jquery.easing.min.js"></script> 
+	
+	<script src="js/jquery.ba-hashchange.min.js"></script>
+	<script src="js/royal-slider-7.9.min.js"></script>
+	
+	<script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	
+</head>
+<body>
+	<div id="main-body">		
+		<div id="slider-ajax-container">
+<div id="image-gallery" class="royalSlider default">
+	<!-- <div class="royalLoadingScreen"><p>Loading slider&hellip;</p></div> -->
+	<ul class="royalSlidesContainer dragme">  
+		<li class="royalSlide" data-thumb="img/galleryAssets/1_thumb.jpg" data-src="img/galleryAssets/1.jpg">  
+			<div class="royalCaption"> 
+				<div class="royalCaptionItem royalMidText">Gallery example (smart lazy-loading enabled)</div>               
+			</div>                                                   
+		</li>                           
+		<li class="royalSlide" data-thumb="img/galleryAssets/2_thumb.jpg" data-src="img/galleryAssets/2.jpg">                           
+			<div class="royalCaption"> 
+				<div class="royalCaptionItem" style="font-size: 1em;">Bird photography in this demo by <a href="http://www.flickr.com/photos/johnfish/" target="_blank">John&amp;Fish</a><br></div>                                                 
+			</div>             
+		</li>
+		<li class="royalSlide" data-thumb="img/galleryAssets/3_thumb.jpg" data-src="img/galleryAssets/3.jpg">                       
+			<div class="staticTextBlock" style="position: absolute;">I'm a static text block</div>
+		</li>
+		<li class="royalSlide" data-thumb="img/galleryAssets/4_thumb.jpg" data-src="img/galleryAssets/4.jpg"></li>
+		<li class="royalSlide" data-thumb="img/galleryAssets/5_thumb.jpg" data-src="img/galleryAssets/5.jpg">
+			<div class="staticTextBlock non-draggable" style="position: absolute;">I'm a static and selectable text block</div>
+			
+		</li>
+		<li class="royalSlide" data-thumb="img/galleryAssets/6_thumb.jpg" data-src="img/galleryAssets/6.jpg"></li>                            
+		  <li class="royalSlide" data-thumb="img/galleryAssets/7_thumb.jpg" data-src="img/galleryAssets/7.jpg"></li>
+		<li class="royalSlide" data-thumb="img/galleryAssets/8_thumb.jpg" data-src="img/galleryAssets/8.jpg"></li>
+		<li class="royalSlide" data-thumb="img/galleryAssets/9_thumb.jpg" data-src="img/galleryAssets/9.jpg"></li>
+		<li class="royalSlide" data-thumb="img/galleryAssets/10_thumb.jpg" data-src="img/galleryAssets/10.jpg"></li>        
+		<li class="royalSlide" data-thumb="img/galleryAssets/11_thumb.jpg" data-src="img/galleryAssets/11.jpg"></li>        
+	  
+		<li class="royalSlide" data-thumb="img/galleryAssets/6_thumb.jpg" data-src="img/galleryAssets/6.jpg"></li>                            
+		<li class="royalSlide" data-thumb="img/galleryAssets/7_thumb.jpg" data-src="img/galleryAssets/7.jpg"></li>
+		<li class="royalSlide" data-thumb="img/galleryAssets/8_thumb.jpg" data-src="img/galleryAssets/8.jpg"></li>
+		<li class="royalSlide" data-thumb="img/galleryAssets/9_thumb.jpg" data-src="img/galleryAssets/9.jpg"></li>
+		<li class="royalSlide" data-thumb="img/galleryAssets/10_thumb.jpg" data-src="img/galleryAssets/10.jpg"></li>        
+		<li class="royalSlide" data-thumb="img/galleryAssets/11_thumb.jpg" data-src="img/galleryAssets/11.jpg"></li>             
+	</ul> 
+</div>
+		   
+<script>				  
+	$(document).ready(function() {			   
+		royalSliderInstance = $('#image-gallery').royalSlider({
+			captionShowEffects:["fade"],
+			controlNavThumbs:true,
+			imageAlignCenter:true,
+			directionNavEnabled: true,
+			welcomeScreenEnabled:false,
+			hideArrowOnLastSlide:true,
+			keyboardNavEnabled:true
+		}).data('royalSlider');	   
+	});
+</script>
+			
+		</div>
+		<div id="content-wrapper">			
+			<div id="preview-select" class="clearfix">
+				<div class="check-out-demos"></div>
+				<a href="#banner-rotator" class="preview-btn banner-btn"><span class="preview-name">Banner Rotator</span></a>
+				<a href="#image-gallery" class="preview-btn gallery-btn"><span class="preview-name">Image Gallery</span></a>
+				<a href="#content-slider" class="preview-btn slider-btn"><span class="preview-name">Content Slider</span></a>
+				<a href="#mini-banners" class="preview-btn mini-banners-btn"><span class="preview-name">Two Mini-Banners</span></a>
+			</div>
+			<div id="description-text">RoyalSlider is a cross-device jQuery image gallery and content slider plugin with touch-based navigation, fluid layout and animated caption-blocks with custom effects.  Use it as content slider, image gallery, banner rotator, or even presentation.<br /><a id="description-and-testimonials-link" href="http://codecanyon.net/item/royalslider-touchenabled-jquery-image-gallery/461126?ref=Semenov">View full description and buyer testimonials on CodeCanyon &rarr;</a>
+			</div>			
+			<div class="video-features-wrap clearfix">
+				<h2 style="width: 100%; text-align: center;">Top 8 RoyalSlider Features:</h2>
+				<div class="features left">					
+					<ul class="features-list">
+						<li>Touch navigation for mobile and desktop</li>
+						<li>Hardware-accelerated CSS3 transitions for iOS devices</li>
+						<li>Smart lazy-loading &mdash; preloads nearby images after current</li>						
+						<li>Any content inside each slide</li>										
+					</ul>
+				</div>
+				<div class="features right">					
+					<ul class="features-list">
+						<li>Fluid layout &mdash; change slider size at any time</li>
+						<li>Three unique skins, easily editable using CSS</li>
+						<li>Fade or move transition for slides</li>
+						<li>Clean and simple documentation, powerful API</li>							
+					</ul>
+				</div>
+			</div>
+			<div id="screenshots-wrap" class="clearfix">
+				<div class="slider-screenshots-arrow"></div>
+				<a rel="screenshots-group" class="screenshot-thumb" href="img/screenshots/1.jpg" title="Minimal white skin">
+					<img src="img/screenshots/1s.png" width="132" height="92" />
+					<span class="open-icon"></span>
+				</a>
+				<a rel="screenshots-group" class="screenshot-thumb" href="img/screenshots/3.jpg" title="iSkin">
+					<img src="img/screenshots/3s.png" width="132" height="92" />
+					<span class="open-icon"></span>
+				</a>
+				<a rel="screenshots-group" class="screenshot-thumb" href="img/screenshots/4.jpg" title="Default Black & White skin">
+					<img src="img/screenshots/4s.png" width="132" height="92" />
+					<span class="open-icon"></span>
+				</a>  
+				<a rel="screenshots-group" class="screenshot-thumb" href="img/screenshots/2.jpg" title="iSkin without arrows and with thumbnails">
+					<img src="img/screenshots/2s.png" width="132" height="92" />
+					<span class="open-icon"></span>
+				</a> 
+			
+			</div>
+			<div id="get-wordpress-version-text">Using WordPress? Take a look at <a href="http://codecanyon.net/item/royalslider-touch-content-slider-for-wordpress/700256?ref=Semenov">RoyalSlider WordPress Plugin</a>.</div>	
+			
+			<div id="big-buy">	        
+				<a id="bottom-purchase-btn" href="http://codecanyon.net/item/royalslider-touchenabled-jquery-image-gallery/461126?ref=Semenov"  class="big-purchase-btn"><span class="buy-text">Buy this slider for $12</span></a> 
+				<span class="sub-text">Free updates and support</span>   
+			</div>		
+			<!-- <div id="footer">   
+				<p>RoyalSlider is proudly brought to you by <a href="http://twitter.com/dimsemenov">Dmitry Semenov</a>. &copy; 2011 Dmitry Semenov.</p>
+			</div> -->
+		</div>
+	</div>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-25969065-1']);
+	 /* _gaq.push(['_trackPageview', location.pathname + location.search + location.hash]);*/
+	
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
+	<script>            
+		var royalSliderInstance;
+		var royalSliders = {
+				'banner-btn' : {
+					html:'banner-rotator.html',
+					width: '100%',
+					height: '400px',
+					hash: 'banner-rotator'
+				}, 
+				'gallery-btn' : {
+					html:'image-gallery.html', 
+					width: '940px',
+					height: '518px',
+					hash: 'image-gallery'
+				},				
+				'slider-btn' : {
+					html:'content-slider.html', 
+					width: '940px',
+					height: '300px',
+					hash: 'content-slider'
+				},
+				'mini-banners-btn' : {
+					html:'two-mini-banners.html', 
+					width: '940px',
+					height: '400px',
+					hash: 'mini-banners'
+				}
+		};
+		var lastClickedPreview;
+		jQuery(document).ready(function() {
+			$('#bottom-purchase-btn').click(function() {
+				_gaq.push(['_trackEvent', 'RS bottom purchase button', 'click']);        		
+			});
+			$('#top-bar-purchase-text').click(function() {
+				_gaq.push(['_trackEvent', 'RS top bar purchase text', 'click']);           		
+			});
+			$('#description-and-testimonials-link').click(function() {
+				_gaq.push(['_trackEvent', 'RS description and testimonials', 'click']);  
+			});        	
+			$('.screenshot-thumb').click(function() {
+				_gaq.push(['_trackEvent', 'RS screenshot', 'click', $(this).attr('title')]);
+			});
+			
+			
+			$(".screenshot-thumb").fancybox();
+			
+			var ajaxContainer = $('#slider-ajax-container');
+			var isLoading = false;
+			var ajaxRequest;
+			
+			
+			$.each(royalSliders, function(name, value) {              
+				$('#preview-select .' + name).data('info', value);
+			});
+		   
+			
+		  
+			$(window).hashchange( function(){	
+				
+				var hash = location.hash;			
+				hash = hash.replace(/^#/, '');
+				
+				
+				_gaq.push(['_trackPageview',location.pathname + location.search + location.hash]);
+				
+				if(isLoading) {			    	
+					if(ajaxRequest) {
+						ajaxRequest.abort();			    		
+					}
+					ajaxContainer.stop(true);
+					if(royalSliderInstance && royalSliderInstance.slider) {
+						royalSliderInstance.slider.stop(true);
+					}
+				}
+				isLoading = true;
+				
+				var newSliderValue;
+				var newSliderName;
+				if(hash) {				
+					$.each(royalSliders, function(name, value) {					
+						if(value.hash === hash) {	
+							newSliderValue = value;
+							newSliderName = name;
+						} 
+					});
+				} else {	
+					newSliderValue = royalSliders['banner-btn'];
+					newSliderName = 'banner-btn';
+				}
+				
+				
+				$('#preview-select .selected').removeClass('selected');
+				$('#preview-select .' + newSliderName).addClass('selected');
+				function loadAndShow() {									                	
+					loadSlider(newSliderValue);
+				}
+				
+				if(royalSliderInstance) {								
+					royalSliderInstance.slider.fadeOut('fast', loadAndShow);		                	
+				} else {
+					loadAndShow();
+				}	
+			});
+
+			$(window).hashchange();
+
+			function loadSlider(info) {                
+				ajaxRequest = $.ajax({
+					url: info.html,
+					cache: false,
+					success: function(html){ 
+						ajaxRequest = null;
+						if(royalSliderInstance) {								
+							royalSliderInstance.destroy();								
+							royalSliderInstance = null;								
+						}					
+						ajaxContainer.animate({'height': info.height}, 400, function(){							
+							ajaxContainer.css({width:info.width});								
+							ajaxContainer.append(html);
+							royalSliderInstance.slider.hide().fadeIn(400);			
+							isLoading = false;
+						});            			
+					}
+				});            	
+			}		    
+		});
+	</script>
+
+</body>
+</html>
