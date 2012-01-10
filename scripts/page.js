@@ -1,4 +1,4 @@
-(function($) {
+﻿(function($) {
 	
 	$(function() {
 	    $('#fileupload').fileupload();
@@ -198,10 +198,14 @@
         
         //$('[id*=rumor_]').modal();
         
-        $('.new-rumor').parents('li:first').hover(function() { $('.new-rumor').css('opacity', 1) }, function() { $('.new-rumor').css('opacity', 0.25) })
-        $('.settings').parents('li:first').hover(function() { $('.settings').css('opacity', 1) }, function() { $('.settings').css('opacity', 0.25) })
+        //$('.new-rumor').parents('li:first').hover(function() { $('.new-rumor').css('opacity', 1) }, function() { $('.new-rumor').css('opacity', 0.25) })
+        //$('.settings').parents('li:first').hover(function() { $('.settings').css('opacity', 1) }, function() { $('.settings').css('opacity', 0.25) })
         
-        $('i.w').parents('li:first').hover(function() { $(this).find('i.w').css('opacity', 1) }, function() { $(this).find('i.w').css('opacity', 0.25) })
+
+        $('i.w').parents('li').hover(
+			function() { $(this).find('i.w').css('opacity', 1); }, 
+			function() { $(this).find('i.w').css('opacity', 0.25); }
+		)
         
     });
 	

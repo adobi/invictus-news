@@ -42,14 +42,14 @@
             <div class="container">
               <a href="<?php echo  base_url() ?>" class="brand">Invictus News</a>
               <ul class="nav">
-                  <li <?php echo $this->uri->segment(1) === 'rumor' && $this->uri->segment(2) === 'edit' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>rumor/edit"><i class="new-rumor"></i>Create rumor</a></li>
+                  <li <?php echo $this->uri->segment(1) === 'rumor' && $this->uri->segment(2) === 'edit' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>rumor/edit"><i class=" w new-rumor"></i>Create rumor</a></li>
                   <li <?php echo $this->uri->segment(1) === 'platform' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>platform">Platforms</a></li>
                   <li <?php echo $this->uri->segment(1) === 'game' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>game">Games</a></li>
                   <li <?php echo $this->uri->segment(1) === 'user' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>user">Users</a></li>
               </ul>
               <div class="pull-right">
                   <ul class="nav">
-                      <li><a href="<?php echo base_url() ?>user/change_password"><i class="settings"></i>Settings</a></li>
+                      <li><a href="<?php echo base_url() ?>user/change_password"><i class="w cog-w"></i>Settings</a></li>
                       <li><a href="<?php echo base_url() ?>auth/logout" style="font-weight:bold"><i class="w off-w"></i>Logout</a></li>
                   </ul>
               </div>

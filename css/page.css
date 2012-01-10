@@ -1,4 +1,4 @@
-.tabs a {
+﻿.tabs a {
     border:1px solid #ddd!important;
 }
 .tabs span, .pills span {
@@ -113,6 +113,11 @@ i {
     margin-right:5px;
 }
 
+.nav .cug {
+	margin-top:3px;
+	margin-right:5px;
+}
+
 table td  {
     vertical-align:middle;
 }
@@ -140,15 +145,15 @@ table thead th {
     display: inline-block;
     vertical-align: middle;
     vertical-align: text-top;
-    background: url('../images/td_web_sprite_icons.png');
+    background: url('../images/td_web_sprite_icons.png')!important;
     width: 22px;
     height:21px;
-    background-position: -60px -50px;
+    background-position: -60px -50px!important;
     margin-top:-3px;  
     opacity:0.25;
 }
 
-.nav .active .new-rumor, .settings {
+.nav .active .new-rumor, .settings, .nav .active .w {
     opacity:1!important;
 }
 
