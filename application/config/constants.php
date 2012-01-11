@@ -36,7 +36,7 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
-define('INVICTUS_API_URI', 'http://localhost/invictus.hu/api/');
+define('INVICTUS_API_URI', 'http://invictus.com/api/');
 
 
 /* End of file constants.php */

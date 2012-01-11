@@ -207,6 +207,32 @@
 			function() { $(this).find('i.w').css('opacity', 0.25); }
 		)
         
+		$('.news-filter-options').bind('click', function() {
+		    
+		    var self = $(this), i = self.find('i'), klass = i.attr('class');
+		    
+		    self.parents('legend').nextAll('fieldset').toggle();
+		    
+		    if (/down/.test(klass)) {
+
+		        i.removeClass('arrow-down').addClass('arrow-up');
+		    }
+		    else {
+		        
+    		    if (/up/.test(klass)) {
+    		        i.removeClass('arrow-up').addClass('arrow-down');
+    		    }
+		    }
+
+		    return false;
+		});
+		
+        $("a[rel=popover]")
+          .popover()
+          .click(function(e) {
+            e.preventDefault()
+          })		
+		
     });
 	
 }) (jQuery);

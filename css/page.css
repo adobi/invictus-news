@@ -130,6 +130,10 @@ table td  {
     text-align:right;
 }
 
+.popover .title, .popover .content {
+    text-align:left!important;
+}
+
 table thead th {
     background-color: rgba(141, 192, 219, 0.25);
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
