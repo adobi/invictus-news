@@ -13,19 +13,23 @@ class Usergames extends MY_Model
             
             return false;
         }
-
-        $this->load->library('Api', 'api');
         
-        $result = $this->api->setUri(INVICTUS_API_URI)->getGames();
-        
-        if (!$result) return false;
-        
-        $this->load->model('Games', 'game');
-        $this->game->execute('truncate table ' . $this->game->getName().';');
-        foreach ($result as $r) {
-            $this->game->insert(array('id'=>$r->id, 'name'=>$r->name));
+        if (!$this->session->userdata('api_loaded')) {
+            
+            $this->load->library('Api', 'api');
+            
+            $result = $this->api->setUri(INVICTUS_API_URI)->getGames();
+            
+            if (!$result) return false;
+            
+            $this->load->model('Games', 'game');
+            $this->game->execute('truncate table ' . $this->game->getName().';');
+            foreach ($result as $r) {
+                $this->game->insert(array('id'=>$r->id, 'name'=>$r->name));
+            }
+            
+            $this->session->set_userdata('api_loaded', true);
         }
-        
         /*
         $gameIds = array();
         $gameNames = array();

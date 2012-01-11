@@ -411,6 +411,10 @@ class My_Model extends CI_Model
 	    return "`" . $column . "`";
 	}
 	
+    public function count($condition = array()) 
+    {
+        return empty($condition) ? count($this->fetchAll()) : count($this->fetchRows(array('where'=>$condition)));
+    }	
 	
 	public function toAssocArray($key, $value, $data) 
 	{

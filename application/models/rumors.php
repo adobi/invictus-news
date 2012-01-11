@@ -7,7 +7,7 @@ class Rumors extends MY_Model
     protected $_name = "in_rumor";
     protected $_primary = "id";
     
-    public function fetchForUser($userId, $filters = array()) 
+    public function fetchForUser($userId, $filters = array(), $page = false) 
     {
         if (!$userId) return false;
         
@@ -15,11 +15,15 @@ class Rumors extends MY_Model
         
         $user = $this->user->find($userId);
         
+        $perPage = ITEMS_PER_PAGE;
+        
+        if (!$page) $page = 0;
+                
         if (!$user) return false;
         
         if ($user->role === '1') {
             
-            if (empty($filters))
+            if (empty($filters)) {
                 /*
                 return $this->execute("select 
                                         r.* 
@@ -27,12 +31,19 @@ class Rumors extends MY_Model
                                       from in_rumor r order by created desc");
                 */
                 
-                return $this->execute("select r.*
+                $sql = "select distinct r.*
                                 , (select group_concat(distinct(g.name), ' ') from in_bridge b join in_game g on b.game_id = g.id where b.rumor_id = r.id) as games
                                 , (select group_concat(distinct(p.name), ' ') from in_bridge b join in_platform p on b.platform_id = p.id where b.rumor_id = r.id) as platforms
-                            from in_rumor r order by created desc
-                        ");
+                            from in_rumor r order by created desc limit $perPage offset $page
+                        ";
                 
+                $result = $this->execute($sql);
+                $return['result'] = $result;
+                $return['count'] = @current($this->execute('select count(id) as total from in_rumor'))->total;
+                
+                return $return;
+            }
+            
             $games = false;
             if (isset($filters['games'])) {
                 $games = join(', ', $filters['games']);
@@ -46,35 +57,54 @@ class Rumors extends MY_Model
             if ($games || $platforms) {
                 
                 
-                $sql = "select * from in_rumor r where id in ( select rumor_id from in_bridge";
-                
+                $sql = "select distinct r.*
+                            , (select group_concat(distinct(g.name), ' ') from in_bridge b join in_game g on b.game_id = g.id where b.rumor_id = r.id) as games
+                            , (select group_concat(distinct(p.name), ' ') from in_bridge b join in_platform p on b.platform_id = p.id where b.rumor_id = r.id) as platforms
+                            from in_rumor r where id in ( select rumor_id from in_bridge";
+                $sqlTotal = "select count(distinct r.id) as total from in_rumor r where id in ( select rumor_id from in_bridge";
                 if ($games && $platforms) {
                     
-                    $sql .= " where game_id in ($games) and platform_id in ($platforms)";
+                    $s = " where game_id in ($games) and platform_id in ($platforms)";
+                    $sql .= $s;
+                    $sqlTotal .= $s;
                 } else {
                     
-                    if ($games)
-                        $sql .= " where game_id in ($games)";
+                    if ($games) {
+                        $s = " where game_id in ($games)";
+                        $sql .= $s;
+                        $sqlTotal .= $s;
+                    }
                         
-                    if ($platforms)
-                        $sql .= " where platform_id in ($platforms)";
+                    if ($platforms) {
+                        $s = " where platform_id in ($platforms)";
+                        $sql .= $s;
+                        $sqlTotal .= $s;
+                    }
                 }
                     
-                $sql .= " )";
+                $sql .= " )  limit $perPage offset $page";
+                $sqlTotal .= ")";
                 
+                $result = $this->execute($sql);
+                $return['result'] = $result;
+                $return['count'] = @current($this->execute($sqlTotal))->total;
                 
-                
-                return $this->execute($sql);
+                return $return;
             }
             
             return false;
             
         } else {
             
-            $sql = "select * from in_rumor r join in_bridge b on r.id = b.rumor_id where b.game_id in (select game_id from in_user_game where user_id = $userId)";
-            
-            return $this->execute($sql);
-            
+            $sql = "select  distinct r.*
+                        , (select group_concat(distinct(g.name), ' ') from in_bridge b join in_game g on b.game_id = g.id where b.rumor_id = r.id and  b.game_id in (select game_id from in_user_game where user_id = $userId)) as games
+                        , (select group_concat(distinct(p.name), ' ') from in_bridge b join in_platform p on b.platform_id = p.id where b.rumor_id = r.id and  b.game_id in (select game_id from in_user_game where user_id = $userId)) as platforms
+                        from in_rumor r join in_bridge b on r.id = b.rumor_id and b.game_id in (select game_id from in_user_game where user_id = $userId)  limit $perPage offset $page";
+            $result = $this->execute($sql);
+            $return['result'] = $result;
+            $return['count'] = @current($this->execute("select count(distinct r.id) as total from in_rumor r join in_bridge b on r.id = b.rumor_id where b.game_id in (select game_id from in_user_game where user_id = $userId)"))->total;
+            //dump($return); die;
+            return $return;            
         }
         
         return false;

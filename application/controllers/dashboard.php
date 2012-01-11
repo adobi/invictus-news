@@ -25,8 +25,12 @@ class Dashboard extends MY_Controller
         $data['games'] = $games;
 
         $data['platforms'] = $this->game->toAssocArray('id', 'name', $this->platform->fetchAll());        
-            
-        $data['items'] = $this->model->fetchForUser($this->session->userdata('logged_in')->id, $_POST);
+        
+        $result = $this->model->fetchForUser($this->session->userdata('logged_in')->id, $_POST, $this->uri->segment(3));
+        
+        $data['items'] = $result['result'];
+        
+        $data['pagination_links'] = $this->paginate('dashboard/index/', 3, $result['count']);
         
         $this->template->build('dashboard/index', $data);
     }

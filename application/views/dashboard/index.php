@@ -97,4 +97,5 @@
             </li>
         <?php endforeach ?>
     </ul>    
+    <?php echo $pagination_links ?>
 <?php endif ?>
