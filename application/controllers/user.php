@@ -6,6 +6,18 @@ require_once 'MY_Controller.php';
 
 class User extends MY_Controller 
 {
+    
+    public function __construct()
+    {
+        parent::__construct();
+
+        if ($this->session->userdata('logged_in')->role !== '1') {
+            
+            redirect(base_url().'dashboard');
+        }
+        
+    }
+    
     public function index() 
     {
         $data = array();
@@ -73,14 +85,14 @@ class User extends MY_Controller
                 $id = $this->model->insert($_POST);
             }
 
+            $this->usergames->delete(array('user_id'=>$id));
+            
             if ($games) {
                 
                 foreach ($games as $game) {
                     
                     $this->usergames->insert(array('game_id'=>$game, 'user_id'=>$id));
                 }
-            } else {
-                $this->usergames->delete(array('user_id'=>$id));
             }
             
             redirect($_SERVER['HTTP_REFERER']);

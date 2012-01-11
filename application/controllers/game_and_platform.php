@@ -6,6 +6,18 @@ require_once 'MY_Controller.php';
 
 class Game_and_platform extends MY_Controller 
 {
+    
+    public function __construct()
+    {
+        parent::__construct();
+
+        if ($this->session->userdata('logged_in')->role !== '1') {
+            
+            redirect(base_url().'dashboard');
+        }
+        
+    }
+        
     public function edit() 
     {
         $data = array();

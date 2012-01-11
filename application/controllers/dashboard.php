@@ -12,7 +12,7 @@ class Dashboard extends MY_Controller
         
         $this->load->model("Rumors", 'model');
         
-        $data['items'] = $this->model->fetchAll();
+        $data['items'] = $this->model->fetchForUser($this->session->userdata('logged_in')->id);
         
         $this->template->build('dashboard/index', $data);
     }

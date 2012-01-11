@@ -14,6 +14,7 @@ class Rumor extends MY_Controller
         
         $data['items'] = $this->model->fetchAll(array('order'=>array('by'=>'created', 'dest'=>'desc')));
         
+        
         $this->template->build('/index', $data);
     }
     
@@ -36,7 +37,8 @@ class Rumor extends MY_Controller
          */
         $games = $this->usergames->fetchForUser($this->session->userdata('logged_in')->id);
         if (!$games) {
-            $games = $this->game->toAssocArray('id', 'name', $this->game->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc'))));
+            //$games = $this->game->toAssocArray('id', 'name', $this->game->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc'))));
+            $games = $this->game->toAssocArray('id', 'name', $this->game->fetchAll());
         } else {
             $games = $this->usergames->toAssocArray('id', 'name', $games);
         }

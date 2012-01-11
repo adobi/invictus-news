@@ -7,14 +7,14 @@
 
 <?php if ($item): ?>
     
-    <p class="right">
+    <fieldset class="form-actions right">
         <?php if ($this->session->userdata('rumor_edited')): ?>
             If you changed the <strong>Games</strong> or <strong>Platforms</strong> values you have to check the &rarr;
             <?php $this->session->unset_userdata('rumor_edited'); ?>
         <?php endif ?>
     
         <a class="btn primary" href="<?php echo base_url() ?>rumor/settings/<?php echo $item->id ?>"><i class="cog"></i>Settings</a>
-    </p>
+    </fieldset>
 <?php endif ?>
 
 <?php echo form_open_multipart('', array('id'=>'edit-form', 'class'=>'horizontal-form')) ?>

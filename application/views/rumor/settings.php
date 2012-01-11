@@ -1,9 +1,9 @@
 <?php if ($rumor): ?>
     
         <?php if ($items): ?>
-            <p style="text-align:right;">
+            <fieldset class="form-actions right">
                 <a class="btn success" href="<?php echo base_url() ?>rumor/edit/<?php echo $rumor->id ?>" style=""><i class="edit"></i>Edit</a>
-            </p>
+            </fieldset>
             <h2 style="margin-bottom:20px">
                 <?php echo $rumor->title ?> settings
             </h2>

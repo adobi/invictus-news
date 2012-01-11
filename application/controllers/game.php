@@ -6,11 +6,25 @@ require_once 'MY_Controller.php';
 
 class Game extends MY_Controller 
 {
+    
+    public function __construct()
+    {
+        parent::__construct();
+
+        if ($this->session->userdata('logged_in')->role !== '1') {
+            
+            redirect(base_url().'dashboard');
+        }
+        
+    }
+        
     public function index() 
     {
         $data = array();
         
-        $this->load->model('Games', 'model');
+        $this->load->library('Api', 'api');
+        
+        $data['items'] = $this->api->setUri(INVICTUS_API_URI)->getGames();
         
         $this->template->build('game/index', $data);
     }

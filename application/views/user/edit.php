@@ -14,7 +14,7 @@
         <?php endif ?>
     </legend>
     <fieldset class="control-group">
-        <label class="control-label" for="username">Title</label>
+        <label class="control-label" for="username">Username</label>
         <div class="controls">
             <input type="text" name = "username" id = "username" class = "input-xxlarge" value = "<?php echo $item ? $item->username : '' ?>"/>
         </div>
