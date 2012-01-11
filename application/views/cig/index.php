@@ -1,17 +1,18 @@
-<fieldset class="round">
-    <?= form_open(); ?>
-        <div class="clearfix">
-            <label for="title">Table name</label>
-            <div class="input">
+
+    <?php echo form_open('', array('id'=>'edit-form', 'class'=>'horizontal-form')) ?>    
+        <legend>CRUD Generator</legend>
+     
+        <fieldset class="control-group">
+            <label class="control-label" for="username">Table name</label>
+            <div class="controls">
                 prefix <input type="text" name="prefix" class="span1"/>
                 name <input type="text" name = "table_name" id = "table_name" class = "xxlarge" value = ""/>
             </div>
-        </div>        
-        <div class="actions">
-            <input type="submit" value="Generate" class="btn primary">
-        </div>  
-    <?= form_close(); ?>
-</fieldset>
+        </fieldset>          
+        <fieldset class="form-actions">
+            <button class="btn primary"><i class="ok"></i>Save</button> &nbsp; <a class="btn" href="<?php echo base_url() ?>/<?php echo $this->uri->segment(1) ?>">Cancel</a>
+        </fieldset> 
+    <?php echo form_close(); ?>
 
 <script type="text/javascript">
     $(function() {
