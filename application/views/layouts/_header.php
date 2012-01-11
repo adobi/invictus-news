@@ -48,17 +48,17 @@
                       <!-- 
                       <li <?php echo $this->uri->segment(1) === 'game' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>game">Games</a></li>
                       -->
-                      <li <?php echo $this->uri->segment(1) === 'user' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>user">Users</a></li>
+                      <li <?php echo $this->uri->segment(1) === 'user' && $this->uri->segment(2) !== 'change_password' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>user">Users</a></li>
                   <?php endif ?>
                   <li style="margin-left:30px;"><a href="#">Test Console</a></li>
               </ul>
               <div class="pull-right">
                   <ul class="nav">
-                      <li><a href="<?php echo base_url() ?>user/change_password"><i class="w cog-w"></i>Settings</a></li>
+                      <li <?php echo $this->uri->segment(1) === 'user' && $this->uri->segment(2) === 'change_password' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>user/change_password"><i class="w cog-w"></i>Settings</a></li>
                       <li><a href="<?php echo base_url() ?>auth/logout" style="font-weight:bold"><i class="w off-w"></i>Logout</a></li>
                   </ul>
               </div>
-              <p class="pull-right"  style="color:#aaa;">Hello <strong><?php echo $this->session->userdata('logged_in')->username ?></strong>!</p>
+              <p class="pull-right"  style="color:#aaa; margin-right:10px;">Hello <strong><?php echo $this->session->userdata('logged_in')->username ?></strong>!</p>
             </div>
           </div>
         </div>    

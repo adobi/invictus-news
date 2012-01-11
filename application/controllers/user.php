@@ -112,4 +112,22 @@ class User extends MY_Controller
         
         redirect($_SERVER['HTTP_REFERER']);
     }
+    
+    public function change_password()
+    {
+        
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[password_again]');
+        $this->form_validation->set_rules('password_again', 'Password again', 'trim|required');
+        
+        if ($this->form_validation->run()) {
+            
+            $this->load->model('Users', 'model');
+            
+            $this->model->update(array('password'=>md5($_POST['password'])), $this->session->userdata('logged_in')->id);
+            
+            redirect(base_url());
+        }
+        
+        $this->template->build('user/change_password');
+    }
 }
