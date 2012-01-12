@@ -195,3 +195,10 @@ table thead th {
     background:#ddd;
 }
 */
+
+.active-rumor {
+    background:#FFEDED;//#F7EEDC;
+}
+.inactive-rumor {
+    background:#E6F2DE;//#E6F7DC;
+}

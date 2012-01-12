@@ -39,8 +39,15 @@
     <ul class="thumbnails" style="margin-top:20px;">
         <?php foreach ($items as $item): ?>
             
-            <li class="span4">
+            <li class="span4 <?php echo $item->active === '1' ? 'inactive-rumor' : 'active-rumor' ?>">
                 <div class="thumbnail">
+                    <p class="right">
+                        <?php if ($item->active === '1'): ?>
+                            <a href="<?php echo base_url() ?>rumor/inactivate/<?php echo $item->id ?>" class="btn" rel="twipsy" data-title="Inactivate"><i class="refresh" style="margin-right:0"></i></a>
+                        <?php else: ?>
+                            <a href="<?php echo base_url() ?>rumor/activate/<?php echo $item->id ?>" class="btn" rel="twipsy" data-title="Activate"><i class="refresh" style="margin-right:0"></i></a>
+                        <?php endif ?>
+                    </p>
                     <img class="rumor-image" src="<?php echo base_url() ?>uploads/original/<?php echo $item->thumbnail ?>" alt="">
                     <div class="caption">
                         <h5><?php echo $item->title ?></h5>
@@ -62,7 +69,7 @@
                                     }
                                     //$gp .="</div>";
                                 ?>
-                                <a href="#" rel="popover" data-original-title="Games and Platforms" data-content="<?php echo $gp ?>"><i class="arrow-right"></i></a>
+                                <a style="position:relative;top:-2px;" href="#" rel="popover" data-original-title="Games and Platforms" data-content="<?php echo $gp ?>"><i class="arrow-right"></i></a>
                             <?php else: ?>
                                 &nbsp;
                             <?php endif ?>

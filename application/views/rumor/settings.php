@@ -1,9 +1,18 @@
+
+
 <?php if ($rumor): ?>
-    
+        <fieldset class="form-actions right" style="border-bottom:1px solid #ddd;">
+            <?php if (!$items): ?>
+               <span class="alert-message block-message error">This rumor is not associated with any game or platform, <strong>Edit</strong> first &rarr;</span>
+            <?php endif ?>
+            <a class="btn success" href="<?php echo base_url() ?>rumor/edit/<?php echo $rumor->id ?>" style=""><i class="edit"></i>Edit</a>
+            <?php if ($rumor->active === '1'): ?>
+                <a href="<?php echo base_url() ?>rumor/inactivate/<?php echo $rumor->id ?>" class="btn" rel="twipsy" data-title="Inactivate"><i class="refresh" style="margin-right:0"></i></a>
+            <?php else: ?>
+                <a href="<?php echo base_url() ?>rumor/activate/<?php echo $rumor->id ?>" class="btn" rel="twipsy" data-title="Activate"><i class="refresh" style="margin-right:0"></i></a>
+            <?php endif ?>
+        </fieldset>        
         <?php if ($items): ?>
-            <fieldset class="form-actions right">
-                <a class="btn success" href="<?php echo base_url() ?>rumor/edit/<?php echo $rumor->id ?>" style=""><i class="edit"></i>Edit</a>
-            </fieldset>
             <h2 style="margin-bottom:20px">
                 <?php echo $rumor->title ?> settings
             </h2>

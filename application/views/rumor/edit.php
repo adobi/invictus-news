@@ -75,7 +75,20 @@
                 <input type="file" name = "thumbnail" value = "" />
             <?php endif ?>
         </div>
-    </fieldset>         
+    </fieldset>  
+    <!-- 
+    <fieldset class="control-group">
+        <label class="control-label" for="title">Active</label>
+        <div class="controls">
+            <label class="checkbox inline">
+                <input type="radio" value="1" name="active"> Yes
+            </label>
+            <label class="checkbox inline">
+                <input type="radio" value="0" name="active" checked="checked"> No
+            </label>
+        </div>
+    </fieldset>
+     -->       
     <fieldset class="form-actions">
         <button class="btn primary"><i class="ok"></i>Save</button> &nbsp; <a class="btn" href="<?php echo base_url() ?>">Cancel</a>
     </fieldset>      

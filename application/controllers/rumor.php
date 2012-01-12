@@ -164,7 +164,25 @@ class Rumor extends MY_Controller
         $data['items'] = $this->bridge->fetchForRumor($id);
         
         $this->template->build('rumor/settings', $data);
-    }    
+    }   
+    
+    public function activate()
+    {
+        $this->load->model('Rumors', 'rumor');
+        
+        $this->rumor->update(array('active'=>1), $this->uri->segment(3));
+        
+        redirect($_SERVER['HTTP_REFERER']);
+    } 
+
+    public function inactivate()
+    {
+        $this->load->model('Rumors', 'rumor');
+        
+        $this->rumor->update(array('active'=>0), $this->uri->segment(3));
+        
+        redirect($_SERVER['HTTP_REFERER']);
+    } 
     
     private function _deleteImage($id, $withRecord = false) 
     {
@@ -186,7 +204,7 @@ class Rumor extends MY_Controller
         return $withRecord ? $this->model->delete($id) : true;
     }   
     
-    public function removeElement($array, $element)
+    private function removeElement($array, $element)
     {
         foreach ($array as $i => $value) {
             if ($value == $element) unset($array[$i]);

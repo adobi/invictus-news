@@ -232,7 +232,9 @@
             .click(function(e) {
                 e.preventDefault()
             });
-            	
+        
+        $('a[rel=twipsy]').twipsy();
+                	
 		prettyPrint() 
           
     });
