@@ -2,6 +2,7 @@
 
 <?php if ($rumor): ?>
         <fieldset class="form-actions right" style="border-bottom:1px solid #ddd;">
+            <a href="<?php echo $_SERVER['HTTP_REFERER'] ?>" class="btn primary" style="float:left;"><i class="arrow-left"></i>Go back</a>
             <?php if (!$items): ?>
                <span class="alert-message block-message error">This rumor is not associated with any game or platform, <strong>Edit</strong> first &rarr;</span>
             <?php endif ?>
@@ -22,16 +23,13 @@
                     <fieldset class="control-group">
                         <label class="control-label" for="link_text">Link text</label>
                         <div class="controls">
-                            <input type="text" name = "link_text" id = "link_text" class = "input-xxlarge" value = "<?php echo $item ? $item->link_text : '' ?>"/>
+                            <input type="text" name = "link_text" id = "link_text" class = "input-xxlarge" value = "<?php echo $item ? $item->link_text : '' ?>" data-countable="1" data-limit="<?php echo LINK_TEXT_MAX_LENGTH ?>"/>
                         </div>
                     </fieldset>                
                     <fieldset class="control-group">
                         <label class="control-label" for="link_url">Link url</label>
                         <div class="controls">
-                            <input type="text" name = "link_url" id = "link_url" class = "input-xxlarge" value = "<?php echo $item ? ($item->link_url ? $item->link_url : 'http://') : '' ?>"/>
-                            <?php if ($item && $item->link_url): ?>
-                                <a href="<?php echo $item->link_url ?>" target="_blank">Open link &rarr;</a>
-                            <?php endif ?>
+                            <input type="text" name = "link_url" id = "link_url" class = "input-xxlarge" value = "<?php echo $item ? ($item->link_url ? $item->link_url : 'http://') : '' ?>" data-countable="1" data-limit="<?php echo LINK_URL_MAX_LENGTH ?>"/>
                         </div>
                     </fieldset>  
                     <fieldset class="control-group">

@@ -56,8 +56,8 @@ class Rumor extends MY_Controller
         $data['for_games'] = $for_games;
         $data['for_platforms'] = $for_platforms;
         
-        $this->form_validation->set_rules('title', 'Title', 'trim|required');
-        $this->form_validation->set_rules('description', 'Description', 'trim|required');
+        $this->form_validation->set_rules('title', 'Title', 'trim|required|max_length['.TITLE_MAX_LENGTH.']');
+        $this->form_validation->set_rules('description', 'Description', 'trim|required|max_length['.DESCRIPTION_MAX_LENGTH.']');
         $this->form_validation->set_rules('games[]', 'Games', 'trim|required');
         $this->form_validation->set_rules('platforms[]', 'Platforms', 'trim|required');
         

@@ -41,6 +41,8 @@
         <link rel = "stylesheet" href="<?= base_url() ?>scripts/plugins/google-code-prettify/prettify.css" media="all" />
     	<script src="<?php echo base_url() ?>scripts/plugins/google-code-prettify/prettify.js"></script>    	
     	
+    	<script src="<?php echo base_url() ?>scripts/plugins/charcounter/jquery.charcounter.js"></script>    	
+    	
     </head>
     
     <body>    
@@ -64,8 +66,8 @@
               </ul>
               <div class="pull-right">
                   <ul class="nav">
-                      <li <?php echo $this->uri->segment(1) === 'console' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>console">Test Console</a></li>
                       <li <?php echo $this->uri->segment(1) === 'user' && $this->uri->segment(2) === 'change_password' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>user/change_password"><i class="w cog-w"></i>Settings</a></li>
+                      <li <?php echo $this->uri->segment(1) === 'console' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>console"><i class="w road-w"></i>Test Console</a></li>
                       <li><a href="<?php echo base_url() ?>auth/logout" style="font-weight:bold"><i class="w off-w"></i>Logout</a></li>
                   </ul>
               </div>

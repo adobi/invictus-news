@@ -7,7 +7,8 @@
 
 <?php if ($item): ?>
     
-    <fieldset class="form-actions right">
+    <fieldset class="form-actions right" style="border-bottom:1px solid #ddd;">
+        <a href="<?php echo $_SERVER['HTTP_REFERER'] ?>" class="btn primary" style="float:left;"><i class="arrow-left"></i>Go back</a>
         <?php if ($this->session->userdata('rumor_edited')): ?>
             If you changed the <strong>Games</strong> or <strong>Platforms</strong> values you have to check the &rarr;
             <?php $this->session->unset_userdata('rumor_edited'); ?>
@@ -28,13 +29,13 @@
     <fieldset class="control-group">
         <label class="control-label" for="title">Title</label>
         <div class="controls">
-            <input type="text" name = "title" id = "title" class = "input-xxlarge" value = "<?php echo $item ? $item->title : '' ?>"/>
+            <input type="text" name = "title" id = "title" class = "input-xxlarge" value = "<?php echo $item ? $item->title : '' ?>" data-countable="1" data-limit="<?php echo TITLE_MAX_LENGTH ?>"/>
         </div>
     </fieldset>
     <fieldset class="control-group">
         <label class="control-label" for="description">Description</label>
         <div class="controls">
-            <textarea rows="5" name="description" class="input-xxlarge"><?php echo $item ? $item->description : '' ?></textarea>
+            <textarea rows="5" name="description" class="input-xxlarge" data-countable="1" data-limit="<?php echo DESCRIPTION_MAX_LENGTH ?>"><?php echo $item ? $item->description : '' ?></textarea>
         </div>
     </fieldset>
     <fieldset class="control-group">

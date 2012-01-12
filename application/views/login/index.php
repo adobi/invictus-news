@@ -5,7 +5,7 @@
     }
 </style>
 <p style="margin-bottom:20px;" class="right">
-    <a href="<?php echo base_url() ?>console" class="btn danger btn-large">Try out the test console &rarr;</a>
+    <a href="<?php echo base_url() ?>console" class="btn danger btn-large orange">Try out the test console &rarr;</a>
 </p>
 <?php if (validation_errors()): ?>
     <div class="alert-message block-message error">
