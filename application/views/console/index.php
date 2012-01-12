@@ -1,3 +1,14 @@
+<?php if (!$this->session->userdata('logged_in')): ?>
+    <style type="text/css">
+        .content {
+            margin-top:30px!important;
+        }
+    </style>
+    <p style="margin-bottom:20px;">
+        <a class="btn primary" href="<?php echo base_url() ?>auth/login"><i class="arrow-left"></i>Go back</a>
+    </p>
+<?php endif ?>
+
 <?php if (validation_errors()): ?>
     <div class="alert-message block-message error">
         <?php echo validation_errors() ?>

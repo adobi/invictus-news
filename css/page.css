@@ -202,3 +202,10 @@ table thead th {
 .inactive-rumor {
     background:#E6F2DE;//#E6F7DC;
 }
+
+.btn-large {
+    border-radius: 6px 6px 6px 6px;
+    font-size: 20px;
+    margin-right: 5px;
+    padding: 14px 24px;
+}

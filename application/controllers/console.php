@@ -19,7 +19,7 @@ class Console extends MY_Controller
          *
          * @author Dobi Attila
          */
-        $games = $this->usergames->fetchForUser($this->session->userdata('logged_in')->id);
+        $games = $this->usergames->fetchForUser(@$this->session->userdata('logged_in')->id);
         if (!$games) {
             //$games = $this->game->toAssocArray('id', 'name', $this->game->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc'))));
             $games = $this->game->toAssocArray('id', 'name', $this->game->fetchAll());

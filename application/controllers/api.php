@@ -28,7 +28,7 @@ class Api extends MY_Controller
         
         $this->load->model('Rumors', 'rumor');
         
-        $response = $this->_doctype . $this->rumor->fetchRumorsForApi($game, $platform, $count);
+        $response = /*$this->_doctype . */$this->rumor->fetchRumorsForApi($game, $platform, $count);
         
         echo $response;
         

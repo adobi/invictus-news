@@ -140,7 +140,7 @@ class Rumors extends MY_Model
         
         $newsXML = $this->toXML($newsResult, array('root'=>'news', 'element'=>'item'));
         
-        return "\n<response>$baseUrl$thumbXML$newsXML\n</response>";
+        return "<response>$baseUrl$thumbXML$newsXML\n</response>";
     }
     
     public function getLatest($game, $platform, $count)
@@ -151,7 +151,15 @@ class Rumors extends MY_Model
         }
         
         //$sql = "select * from $this->_name where id in (select rumor_id from in_bridge where game_id = $game and platform_id = $platform) order by created desc limit $count";
-        $sql = "select r.id, r.title, r.description, r.created, b.link_text, b.link_url, b.image from $this->_name r join in_bridge b on r.id = b.rumor_id and b.game_id = $game and b.platform_id = $platform order by created desc limit $count";
+        $sql = "select 
+                    r.id, r.title, r.description, UNIX_TIMESTAMP(r.created) as created
+                    , b.link_text, b.link_url, b.image 
+                from 
+                    $this->_name r 
+                    join in_bridge b on r.id = b.rumor_id and b.game_id = $game and b.platform_id = $platform 
+                where r.active = 1 
+                order by created desc 
+                limit $count";
         //dump($sql); die;
         return $this->execute($sql, true);
     }
