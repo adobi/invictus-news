@@ -29,19 +29,19 @@
     <fieldset class="control-group">
         <label class="control-label" for="title">Title</label>
         <div class="controls">
-            <input type="text" name = "title" id = "title" class = "input-xxlarge" value = "<?php echo $item ? $item->title : '' ?>" data-countable="1" data-limit="<?php echo TITLE_MAX_LENGTH ?>"/>
+            <input type="text" name = "title" id = "title" class = "input-xxlarge" value = "<?php echo $_POST ? @$_POST['title'] : ($item ? $item->title : '') ?>" data-countable="1" data-limit="<?php echo TITLE_MAX_LENGTH ?>"/>
         </div>
     </fieldset>
     <fieldset class="control-group">
         <label class="control-label" for="description">Description</label>
         <div class="controls">
-            <textarea rows="5" name="description" class="input-xxlarge" data-countable="1" data-limit="<?php echo DESCRIPTION_MAX_LENGTH ?>"><?php echo $item ? $item->description : '' ?></textarea>
+            <textarea rows="5" name="description" class="input-xxlarge" data-countable="1" data-limit="<?php echo DESCRIPTION_MAX_LENGTH ?>"><?php echo $_POST ? @$_POST['description'] : ($item ? $item->description : '') ?></textarea>
         </div>
     </fieldset>
     <fieldset class="control-group">
         <label class="control-label" for="games[]">Games</label>
         <div class="controls">
-            <?php echo form_multiselect('games[]', $games, $for_games ? $for_games : '', 'class="chosen input-xxlarge" data-placeholder="Choose a game..."') ?>
+            <?php echo form_multiselect('games[]', $games, $_POST ? @$_POST['games'] : ($for_games ? $for_games : ''), 'class="chosen input-xxlarge" data-placeholder="Choose a game..."') ?>
             <p class="item-nav" style="text-align:left;">
                 <a href="#" class="chosen-select-all">Select all</a> 
                 <a href="#" class="chosen-cancel-all">Cancel all</a>
@@ -51,7 +51,7 @@
     <fieldset class="control-group">
         <label class="control-label" for="platforms[]">Platforms</label>
         <div class="controls">
-            <?php echo form_multiselect('platforms[]', $platforms, $for_platforms ? $for_platforms : '', 'class="chosen input-xxlarge" data-placeholder="Choose a platform..."') ?>
+            <?php echo form_multiselect('platforms[]', $platforms, $_POST ? @$_POST['platforms'] : ($for_platforms ? $for_platforms : ''), 'class="chosen input-xxlarge" data-placeholder="Choose a platform..."') ?>
             <p class="item-nav" style="text-align:left;">
                 <a href="#" class="chosen-select-all">Select all</a> 
                 <a href="#" class="chosen-cancel-all">Cancel all</a>

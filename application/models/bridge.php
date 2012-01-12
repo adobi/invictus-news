@@ -25,8 +25,10 @@ class Bridge extends MY_Model
         
         $sql = "select b.*, g.name as game, p.name as platform from $this->_name as b join in_game as g on b.game_id = g.id join in_platform p on b.platform_id = p.id where b.rumor_id = $rumorId";
         
-        $result = $this->execute($sql);
+        //dump($sql);
         
+        $result = $this->execute($sql);
+        //dump($result);
         if (!$result) return false;
         
         if (!$type) return $result;

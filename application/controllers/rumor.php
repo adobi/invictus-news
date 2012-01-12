@@ -78,7 +78,8 @@ class Rumor extends MY_Controller
             
             $platforms = $_POST['platforms'];
             unset($_POST['platforms']);
-             
+            
+            $insert = false; 
             if ($id) {
                 $this->model->update($_POST, $id);
             } else {
@@ -86,10 +87,12 @@ class Rumor extends MY_Controller
                 $_POST['created'] = date('Y-m-d H:i:s', time());
                 
                 $id = $this->model->insert($_POST);
+                
+                $insert = true;
             }
             
             $rows = $this->bridge->fetchForRumor($id);
-
+            //dump($rows); die;
             $this->bridge->delete(array('rumor_id'=>$id));
             
             foreach ($games as $game) {
@@ -99,15 +102,19 @@ class Rumor extends MY_Controller
                         'game_id'=>$game, 
                         'platform_id'=>$platform,
                     );
-                    foreach ($rows as $row) {
-                        if ($row->game_id == $game && $row->platform_id == $platform) {
-                            
-                            $d['link_text'] = $row->link_text;
-                            $d['link_url'] = $row->link_url;
-                            $d['image'] = $row->image;
+                    if ($rows) {
+                        
+                        foreach ($rows as $row) {
+                            if ($row->game_id == $game && $row->platform_id == $platform) {
+                                
+                                $d['link_text'] = $row->link_text;
+                                $d['link_url'] = $row->link_url;
+                                $d['image'] = $row->image;
+                            }
                         }
                     }
                     $this->bridge->insert($d);
+                    $insert = true;
                 }
             }
             
@@ -116,6 +123,10 @@ class Rumor extends MY_Controller
             */
             
             $this->session->set_userdata('rumor_edited', true);
+            
+            if (!$this->uri->segment(3)) {
+                redirect(base_url() . 'rumor/settings/'.$id);
+            }
             
             redirect($_SERVER['HTTP_REFERER']);
         } 
@@ -128,7 +139,7 @@ class Rumor extends MY_Controller
         
         if ($id) {
             
-            $this->load->model('Bridge', 'birdge');
+            $this->load->model('Bridge', 'bridge');
             
             $this->bridge->delete(array('rumor_id'=>$id));
             
