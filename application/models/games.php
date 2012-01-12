@@ -11,8 +11,15 @@ class Games extends MY_Model
     {
         //$games = parent::fetchAll();
         
-        $this->load->library('Api', 'api');
-        
-        return $this->api->setUri(INVICTUS_API_URI)->getGames();
+        if (!$this->session->userdata('api_loaded')) {
+            
+            
+            $this->load->library('Api', 'api');
+            
+            return $this->api->setUri(INVICTUS_API_URI)->getGames();
+        } else {
+            
+            return parent::fetchAll($params, $current, $showSelfColumns);
+        }
     }
 }

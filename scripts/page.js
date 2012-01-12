@@ -228,11 +228,13 @@
 		});
 		
         $("a[rel=popover]")
-          .popover()
-          .click(function(e) {
-            e.preventDefault()
-          })		
-		
+            .popover()
+            .click(function(e) {
+                e.preventDefault()
+            });
+            	
+		prettyPrint() 
+          
     });
 	
 }) (jQuery);

@@ -273,13 +273,15 @@ class My_Model extends CI_Model
 	 * @return array
 	 * @author Dobi Attila
 	 */
-	public function find($id) 
+	public function find($id, $isXML = false) 
 	{
 		$db = $this->db;
 		
 		$where = array($this->_quote($this->_primary) => $id);
 		
 		$query = $db->select()->from($this->_name)->where($where);
+		
+		if ($isXML) return $this->toXML($query->get());
 		
 		return $query->get()->row();		
 	}
@@ -387,7 +389,7 @@ class My_Model extends CI_Model
 	 * @return object - result set object
 	 * @author Dobi Attila
 	 */
-	public function execute($sql) 
+	public function execute($sql, $onlyResult = false) 
 	{
 		if (!$sql) {
 		    
@@ -395,6 +397,8 @@ class My_Model extends CI_Model
 		}
 		
 		$r = $this->db->query($sql);
+		
+		if ($onlyResult) return $r;
 		
 		return is_object($r) ? $r->result() : $this->db->affected_rows();
 	}
@@ -436,5 +440,22 @@ class My_Model extends CI_Model
 	    }
 	    
 	    return $ret;
+	}
+	
+	public function toXML($query, $config = array())
+	{
+	    $this->load->dbutil();
+        $c = array(
+          'newline' => "\n",
+          'tab'    => "\t"
+        );
+        
+        if ($config) {
+            foreach ($config as $i=>$item) { 
+                $c[$i] = $item;
+            }
+        }
+        
+        return  $this->dbutil->xml_from_result($query, $c); 	    
 	}
 }

@@ -12,10 +12,12 @@ class MY_Controller extends CI_Controller
 
         parent::__construct();
         
-        if ($this->uri->segment(1) !== 'auth' && ($this->uri->segment(1) !== 'games' && $this->uri->segment(1) !== 'press' ) && !$this->session->userdata('logged_in')) {
-            
-            redirect(base_url() . 'auth/login');
-            
+        if ($this->uri->segment(1) !== 'api') {
+            if ($this->uri->segment(1) !== 'auth' && ($this->uri->segment(1) !== 'games' && $this->uri->segment(1) !== 'press' ) && !$this->session->userdata('logged_in')) {
+                
+                redirect(base_url() . 'auth/login');
+                
+            }
         }
     }
     

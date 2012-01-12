@@ -3,6 +3,14 @@
     <head>
     	<title>Invictus News</title>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+    
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->        
         
         <link rel = "stylesheet" href="<?= base_url() ?>css/bootstrap2.min.css" media="all" />
         <link rel = "stylesheet" href="<?= base_url() ?>css/aristo.css" media="all" />
@@ -28,7 +36,10 @@
     	
         <link rel = "stylesheet" href="<?= base_url() ?>scripts/plugins/chosen/chosen.css" media="all" />
     	<script src="<?php echo base_url() ?>scripts/plugins/chosen/chosen.jquery.min.js"></script>
-    	
+
+    
+        <link rel = "stylesheet" href="<?= base_url() ?>scripts/plugins/google-code-prettify/prettify.css" media="all" />
+    	<script src="<?php echo base_url() ?>scripts/plugins/google-code-prettify/prettify.js"></script>    	
     	
     </head>
     
@@ -42,7 +53,7 @@
             <div class="container">
               <a href="<?php echo  base_url() ?>" class="brand">Invictus News</a>
               <ul class="nav">
-                  <li <?php echo $this->uri->segment(1) === 'rumor' && $this->uri->segment(2) === 'edit' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>rumor/edit"><i class=" w new-rumor"></i>Create rumor</a></li>
+                  <li <?php echo $this->uri->segment(1) === 'rumor' && $this->uri->segment(2) === 'edit' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>rumor/edit"><i class=" w new-rumor"></i>Create a rumor</a></li>
                   <?php if ($this->session->userdata('logged_in')->role === '1'): ?>
                       <li <?php echo $this->uri->segment(1) === 'platform' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>platform">Platforms</a></li>
                       <!-- 
@@ -50,10 +61,10 @@
                       -->
                       <li <?php echo $this->uri->segment(1) === 'user' && $this->uri->segment(2) !== 'change_password' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>user">Users</a></li>
                   <?php endif ?>
-                  <li style="margin-left:30px;"><a href="#">Test Console</a></li>
               </ul>
               <div class="pull-right">
                   <ul class="nav">
+                      <li <?php echo $this->uri->segment(1) === 'console' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>console">Test Console</a></li>
                       <li <?php echo $this->uri->segment(1) === 'user' && $this->uri->segment(2) === 'change_password' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>user/change_password"><i class="w cog-w"></i>Settings</a></li>
                       <li><a href="<?php echo base_url() ?>auth/logout" style="font-weight:bold"><i class="w off-w"></i>Logout</a></li>
                   </ul>

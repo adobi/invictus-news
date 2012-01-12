@@ -109,4 +109,50 @@ class Rumors extends MY_Model
         
         return false;
     }
+    
+    /**
+     * adott jatekohoz adott platformon visszaadja a $count-nak megfelelo szamu hirt
+     *
+     * @param string $game 
+     * @param string $platform 
+     * @param string $count 
+     * @return void
+     * @author Dobi Attila
+     */
+    public function fetchRumorsForApi($game, $platform, $count)
+    {
+        
+        
+        $newsResult = $this->getLatest($game, $platform, $count);
+        
+        $news = $newsResult->result();
+        if (!$news) {
+            
+            return "<news><error>Empty</error></news>";
+        }
+        
+        $this->load->config('upload');
+        
+        $baseUrl = "\n<uri>".base_url().$this->config->item('upload_dir')."</uri>";
+        
+        $thumb = $this->find($news[0]->id)->thumbnail;
+        $thumbXML = "\n<thumbnail>$thumb</thumbnail>\n";
+        
+        $newsXML = $this->toXML($newsResult, array('root'=>'news', 'element'=>'item'));
+        
+        return "\n<response>$baseUrl$thumbXML$newsXML\n</response>";
+    }
+    
+    public function getLatest($game, $platform, $count)
+    {
+        if (!$game || !$platform) {
+            
+            return false;
+        }
+        
+        //$sql = "select * from $this->_name where id in (select rumor_id from in_bridge where game_id = $game and platform_id = $platform) order by created desc limit $count";
+        $sql = "select r.id, r.title, r.description, r.created, b.link_text, b.link_url, b.image from $this->_name r join in_bridge b on r.id = b.rumor_id and b.game_id = $game and b.platform_id = $platform order by created desc limit $count";
+        //dump($sql); die;
+        return $this->execute($sql, true);
+    }
 }

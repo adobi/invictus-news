@@ -1,6 +1,7 @@
 <?php  
 
-    $config['upload_path'] = dirname($_SERVER['SCRIPT_FILENAME']) . '/uploads/original/';
+    $config['upload_dir'] = '/uploads/original/';
+    $config['upload_path'] = dirname($_SERVER['SCRIPT_FILENAME']) . $config['upload_dir'];
     $config['upload_path_base'] = dirname($_SERVER['SCRIPT_FILENAME']) . '/uploads/';
     //echo $config['upload_path'];
     $config['allowed_types'] = 'gif|jpg|png';
