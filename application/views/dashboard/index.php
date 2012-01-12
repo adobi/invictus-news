@@ -4,8 +4,8 @@
         <legend>
             
             Filter news
-            <p class="pull-right" style="position:relative; top:15px;">
-                <a href="#" class="news-filter-options"><i class="arrow-<?php echo ($_POST) ? 'up' : 'down' ?>"></i></a>
+            <p class="pull-right" style="position:relative; top:0px;">
+                <a href="#" rel = "twipsy" data-title="Toggle options" class="news-filter-options btn"><i style="margin-right:0px;" class="arrow-<?php echo ($_POST) ? 'up' : 'down' ?>"></i></a>
             </p>
         </legend>
         <fieldset class="control-group" <?php echo ($_POST) ? '' : ' style="display:none"' ?>>
