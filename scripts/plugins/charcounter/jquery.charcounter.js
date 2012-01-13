@@ -31,7 +31,7 @@
         
         if (self.data('warning')) that.options.limit = self.data('warning');
 
-        self.after($('<p />')
+        self.parent().append($('<p />')
             .css({
                 'width': width,
                 'text-align': 'right',

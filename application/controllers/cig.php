@@ -22,32 +22,47 @@ class Cig extends CI_Controller
     
     public function index()
     {
+        $data = array();
+        
+        $model = false;
+        $view = false;
+        $controller = false;    
+        
         $this->form_validation->set_rules('table_name', 'Table name', 'trim|required');
         
         if ($this->form_validation->run()) {
-            
             $this->_table = strtolower(str_replace('_', '', $_POST['table_name']));
             
             $this->_preifx = $_POST['prefix'];
             $this->_tabe_without_prefix = $_POST['table_name'];
             
-            $this->_originalTable = $_POST['prefix'] . '_' . $_POST['table_name'];
-            //$result = $this->db->query('show columns from ' . $table)->result();
+            $this->_originalTable = ($_POST['prefix'] ? $_POST['prefix'] . '_' : '') . $_POST['table_name'];
             
-            //dump($result); 
+            if (isset($_POST['model'])) {
+                $model = $this->_generateModel($this->uri->segment(3));
+            }
             
-            $this->_generateModel()->_generateController()->_generateView();
+            if (isset($_POST['view'])) {
+                $view = $this->_generateView($this->uri->segment(3));
+            }
             
-            //dump(preg_match('/(varchar|int)/', 'datetime'));
-            //die;
+            if (isset($_POST['controller'])) {
+                $controller = $this->_generateController($this->uri->segment(3));
+            }
             
-            //die;
+            if ($this->uri->segment(3)) {
+                
+                redirect($_SERVER['HTTP_REFERER']);
+            }
         }
-        
-        $this->template->build('cig/index');
+        $data['model'] = $model;
+        $data['view'] = $view;
+        $data['controller'] = $controller;        
+
+        $this->template->build('cig/index', $data);
     }
     
-    private function _generateController()
+    private function _generateController($writeToFile)
     {
         $table = $this->_table;
         
@@ -76,14 +91,15 @@ class Cig extends CI_Controller
         
         $controllerDefinition = str_replace($tmpls, $vals, $controllerDefinition);
         
-        file_put_contents(APPPATH.'controllers/'.$table.'.php', $controllerDefinition);
+        if ($writeToFile)
+            file_put_contents(APPPATH.'controllers/'.$table.'.php', $controllerDefinition);
         
         //dump($controllerDefinition);
         
-        return $this;
+        return $controllerDefinition;
     }
     
-    private function _generateModel() 
+    private function _generateModel($writeToFile) 
     {
         $table = $this->_originalTable;
         
@@ -93,12 +109,15 @@ class Cig extends CI_Controller
         
         $modelDefinition = str_replace(array('%%MODEL_CLASS_NAME%%', "%%TABLE_NAME%%"), array($model, $table), $modelDefinition);
         
-        file_put_contents(APPPATH.'models/'.strtolower($model) . '.php', $modelDefinition);
+        if ($writeToFile) {
+            
+            file_put_contents(APPPATH.'models/'.strtolower($model) . '.php', $modelDefinition);
+        } 
         
-        return $this;
+        return $modelDefinition;
     }
     
-    private function _generateView()
+    private function _generateView($writeToFile)
     {
         $table = $this->_table;
         $controller = $this->_tabe_without_prefix;
@@ -109,10 +128,13 @@ class Cig extends CI_Controller
         
         $index = str_replace(array('%%CONTROLLER%%'), array($controller), file_get_contents($this->_bundleDir . 'index.php'));
         
-        file_put_contents($viewDir . '/index.php', $index);
-        file_put_contents($viewDir . '/edit.php', $this->_buildViewForTable($table));
+        $edit = $this->_buildViewForTable($table);
         
-        return $this;
+        if ($writeToFile) {
+            file_put_contents($viewDir . '/index.php', $index);
+            file_put_contents($viewDir . '/edit.php', $edit);
+        }
+        return array('index'=>$index, 'edit'=>$edit);
     }
     
     private function _buildViewForTable($table)

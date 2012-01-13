@@ -1,7 +1,17 @@
 ﻿(function($) {
 	
 	$(function() {
-	    $('#fileupload').fileupload();
+
+	    
+        $('.datepicker').datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeYear: true,
+            changeMonth: true,
+            showMonthAfterYear:true,
+            yearRange: '2010:+5'
+        });	  	    
+	    
+	    //$('#fileupload').fileupload();
 	    
 	    $('body').delegate('.edit-video', 'click', function() {
 	        
@@ -31,6 +41,7 @@
                 }, 1500)
             });
 	    
+        /*
 	    $('#rate-star').each(function(i, v) {
 	        var self = $(v);
 	        
@@ -53,14 +64,6 @@
 			
         $('.separator').find('strong').wrap('<a href="javascript:;"></a>');
         $('.separator').find('strong').append('<span  style = " margin-left:2px;font-family:verdana;">»</span>');	    
-	    
-        $('.datepicker').datepicker({
-            dateFormat: 'yy-mm-dd',
-            changeYear: true,
-            changeMonth: true,
-            showMonthAfterYear:true,
-            yearRange: '1980:+5'
-        });	  
         
         $( "#image-sortable" ).sortable({
             //placeholder: "ui-state-highlight",
@@ -113,7 +116,7 @@
             }
         });
 		$( "#video-sortable" ).disableSelection();  
-		
+		*/
         $('body').delegate('a[rel*=dialog]', 'click', function() {
             
             $('.dialog').remove();
@@ -161,12 +164,13 @@
         
         //$('.pills').pills();
         //$('.tabs').pills();
+        /*
         if ($('#redactor').length)
             $('#redactor').redactor({ lang: 'en' });
             
             
         $(".fancybox").fancybox();
-            
+        */    
         $(".chosen").chosen({
             no_results_text: "No results matched", 
         }); 
@@ -189,12 +193,6 @@
             
             select.trigger("liszt:updated");
         });  
-        
-        $('#link_url').bind('blur', function() {
-            var self = $(this), url = self.val();
-            
-            //self.parents('.input:first').append('<div style = "margin-top: 10px;"/>').append($('<img />', {src: 'http://images.websnapr.com/?url=' + url + '&key=' + '082YdqXr94hi' + '&hash=' + encodeURIComponent(websnapr_hash),}));
-        });
         
         //$('[id*=rumor_]').modal();
         

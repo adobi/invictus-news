@@ -30,6 +30,7 @@
                         <label class="control-label" for="link_url">Link url</label>
                         <div class="controls">
                             <input type="text" name = "link_url" id = "link_url" class = "input-xxlarge" value = "<?php echo $item ? ($item->link_url ? $item->link_url : 'http://') : '' ?>" data-countable="1" data-limit="<?php echo LINK_URL_MAX_LENGTH ?>"/>
+                            <a href="#">go to link</a>
                         </div>
                     </fieldset>  
                     <fieldset class="control-group">

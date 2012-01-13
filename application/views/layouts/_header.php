@@ -19,6 +19,8 @@
         <link rel = "stylesheet" href="<?= base_url() ?>scripts/plugins/colorpicker/farbtastic.css" media="all" />
         
         <script src = "http://code.jquery.com/jquery-1.7.min.js"></script>
+        <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.js"></script>
+
         <script src = "<?php echo base_url() ?>scripts/plugins/bootstrap-dropdown.js"></script>
         <script src = "<?php echo base_url() ?>scripts/plugins/bootstrap-tab.js"></script>
         <script src = "<?php echo base_url() ?>scripts/plugins/bootstrap-transition.js"></script>
@@ -36,7 +38,12 @@
     	
         <link rel = "stylesheet" href="<?= base_url() ?>scripts/plugins/chosen/chosen.css" media="all" />
     	<script src="<?php echo base_url() ?>scripts/plugins/chosen/chosen.jquery.min.js"></script>
-
+        
+        <script src = "http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+        <script src="<?php echo base_url(); ?>scripts/plugins/file-upload/jquery.iframe-transport.js"></script>
+        <script src="<?php echo base_url(); ?>scripts/plugins/file-upload/jquery.fileupload.js"></script>
+        <script src="<?php echo base_url(); ?>scripts/plugins/file-upload/jquery.fileupload-ui.js"></script>    	    
+        <script src="<?php echo base_url(); ?>scripts/plugins/scroll/jquery.scrollTo-min.js"></script>  
     
         <link rel = "stylesheet" href="<?= base_url() ?>scripts/plugins/google-code-prettify/prettify.css" media="all" />
     	<script src="<?php echo base_url() ?>scripts/plugins/google-code-prettify/prettify.js"></script>    	

@@ -40,7 +40,7 @@
 
 <?php if ($result): ?>
 
-<legend>Requested url</legend>
+<legend>Request url</legend>
 <pre class="prettyprint">
         <?php echo base_url() ?>api/get_news/<?php echo $_POST['game'] ?>/<?php echo $_POST['platform'] ?>
 </pre>
