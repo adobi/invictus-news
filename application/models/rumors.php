@@ -121,14 +121,18 @@ class Rumors extends MY_Model
      */
     public function fetchRumorsForApi($game, $platform, $count)
     {
+        $this->load->model('Games', 'games');
+        $this->load->model('Platforms', 'platforms');
         
+        $game = @$this->games->findBy('url', $game)->id;
+        $platform = @$this->platforms->findBy('url', $platform)->id;
         
         $newsResult = $this->getLatest($game, $platform, $count);
         
-        $news = $newsResult->result();
+        $news = $newsResult ? $newsResult->result() : false;
         if (!$news) {
             
-            return "<news><error>Empty</error></news>";
+            return "<response><news><error>Empty</error></news></response>";
         }
         
         $this->load->config('upload');

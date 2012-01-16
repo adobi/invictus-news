@@ -458,4 +458,11 @@ class My_Model extends CI_Model
         
         return  $this->dbutil->xml_from_result($query, $c); 	    
 	}
+	
+	public function findBy($columns, $value)
+	{
+	    $result = $this->fetchRows(array('where'=>array($columns=>$value)));
+	    
+	    return $result ? $result[0] : false;
+	}
 }

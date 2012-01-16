@@ -22,16 +22,16 @@ class Console extends MY_Controller
         $games = $this->usergames->fetchForUser(@$this->session->userdata('logged_in')->id);
         if (!$games) {
             //$games = $this->game->toAssocArray('id', 'name', $this->game->fetchAll(array('order'=>array('by'=>'name', 'dest'=>'asc'))));
-            $games = $this->game->toAssocArray('id', 'name', $this->game->fetchAll());
+            $games = $this->game->toAssocArray('url', 'name', $this->game->fetchAll());
         } else {
-            $games = $this->usergames->toAssocArray('id', 'name', $games);
+            $games = $this->usergames->toAssocArray('url', 'name', $games);
         }
         $data['games'] = $games;
 
-        $data['platforms'] = $this->game->toAssocArray('id', 'name', $this->platform->fetchAll());        
+        $data['platforms'] = $this->game->toAssocArray('url', 'name', $this->platform->fetchAll());        
         
-        $this->form_validation->set_rules('game', 'Game', 'trim|required|is_natural_no_zero');
-        $this->form_validation->set_rules('platform', 'Platform', 'trim|required|is_natural_no_zero');
+        $this->form_validation->set_rules('game', 'Game', 'trim|required');
+        $this->form_validation->set_rules('platform', 'Platform', 'trim|required');
         
         $result = false;
         

@@ -42,7 +42,7 @@
             .html($('<span />', {'class': 'char-counter', 'html': this.options.limit}))
         );
          
-        self.bind('keyup', function() {
+        self.on('keyup focus blur', function() {
             that.handle($(this).val().length)
         });
         
@@ -52,7 +52,7 @@
     Charcounter.prototype.handle = function(value)
     {
         var self = $(this.element), 
-            span = self.next('p').find('.char-counter')
+            span = self.parent().find('.char-counter')
             val = this.options.limit - value;
         
         span.html(val);

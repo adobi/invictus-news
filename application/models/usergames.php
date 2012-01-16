@@ -25,19 +25,12 @@ class Usergames extends MY_Model
             $this->load->model('Games', 'game');
             $this->game->execute('truncate table ' . $this->game->getName().';');
             foreach ($result as $r) {
-                $this->game->insert(array('id'=>$r->id, 'name'=>$r->name));
+                $this->game->insert(array('id'=>$r->id, 'name'=>$r->name, 'url'=>$r->url));
             }
             
             $this->session->set_userdata('api_loaded', true);
         }
-        /*
-        $gameIds = array();
-        $gameNames = array();
-        foreach ($result as $r) {
-            $gameIds[] = $r->id;
-            $gameNames[$r->id] = $r->name;
-        }
-        */
+
         
         $result = $this->fetchRows(array(
             'join'=>array(
@@ -50,11 +43,7 @@ class Usergames extends MY_Model
             
             return false;
         }
-        
-        //foreach ($result as $i=>$r) {
-        //    if (in_array($r->game_id, $gameIds)) $r->name = $gameNames[$r->game_id];
-        //}
-        
+
         $usersGames = $this->fetchRows(array('where'=>array('user_id'=>$userId)));
         
         if (!$usersGames) {
