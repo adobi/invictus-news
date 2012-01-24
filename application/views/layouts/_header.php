@@ -50,6 +50,8 @@
     	
     	<script src="<?php echo base_url() ?>scripts/plugins/charcounter/jquery.charcounter.js"></script>    	
     	
+    	<script src="<?php echo base_url() ?>scripts/plugins/prettify-upload/jquery.prettify-upload.js"></script>    	
+    	
     	<!-- <script src="<?php echo base_url() ?>scripts/plugins/sisyphus/sisyphus.min.js"></script>    	 -->
     	
     </head>
