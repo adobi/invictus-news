@@ -51,14 +51,40 @@ class Game_and_platform extends MY_Controller
             } else {
                 //$this->model->insert($_POST);
             }
-            redirect($_SERVER['HTTP_REFERER']);
+            
+            $this->session->set_flashdata('message', 'Item saved, don\'t forget to save the other ones too');
+            
+            //if (!$this->input->is_ajax_request()) {
+                
+                redirect($_SERVER['HTTP_REFERER']);
+            //}
+            
         } else {
+            
+            $this->session->set_flashdata('message', validation_errors());
+            
             if ($_POST) {
                 
                 redirect($_SERVER['HTTP_REFERER']);
             }
         }
     }
+    /*
+    public function sisyphus_forms()
+    {
+        $forms = $this->session->userdata('sisyphus_forms');
+        
+        if (!$forms) {
+            $forms = array();
+        }
+        
+        $forms[] = $this->uri->segment(3);
+        
+        $this->session->set_userdata('sisyphus_forms', $forms);
+        
+        die;
+    }
+    */
     
     public function delete()
     {
@@ -68,6 +94,8 @@ class Game_and_platform extends MY_Controller
             $this->load->model('Bridge', 'model');
             
             $this->model->delete($id);
+            
+            $this->session->set_flashdata('message', 'Settings deleted');
         }
         
         redirect($_SERVER['HTTP_REFERER']);
@@ -80,6 +108,8 @@ class Game_and_platform extends MY_Controller
         if ($id) {
             
             $this->_deleteImage($id);
+            
+            $this->session->set_flashdata('message', 'Image deleted');
         }
         
         redirect($_SERVER['HTTP_REFERER']);

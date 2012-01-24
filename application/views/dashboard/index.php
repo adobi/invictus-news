@@ -2,7 +2,7 @@
 
 <?php echo form_open('', array('id'=>'edit-form', 'class'=>'horizontal-form')) ?>
 
-        <legend style="background:#f5f5f5; padding:5px;">
+        <legend style="background:#f5f5f5; padding:17px 20px 18px; border-top:1px solid #ddd; border-bottom:1px solid #ddd;">
             Filter news
             <p class="pull-left" style="position:relative; top:0px;margin-right:10px;">
                 <a href="#" rel = "twipsy" data-title="Toggle options" class="news-filter-options btn"><i style="margin-right:0px;" class="arrow-<?php echo ($_POST) ? 'up' : 'down' ?>"></i></a>
@@ -42,9 +42,9 @@
                 <div class="thumbnail">
                     <p class="right">
                         <?php if ($item->active === '1'): ?>
-                            <a href="<?php echo base_url() ?>rumor/inactivate/<?php echo $item->id ?>" class="btn" rel="twipsy" data-title="Inactivate"><i class="refresh" style="margin-right:0"></i>Inactivate</a>
+                            <a href="<?php echo base_url() ?>rumor/inactivate/<?php echo $item->id ?>" class="btn" rel="twipsy" data-title="Inactivate"><i class="refresh"></i>Inactivate</a>
                         <?php else: ?>
-                            <a href="<?php echo base_url() ?>rumor/activate/<?php echo $item->id ?>" class="btn" rel="twipsy" data-title="Activate"><i class="refresh" style="margin-right:0"></i>Activate</a>
+                            <a href="<?php echo base_url() ?>rumor/activate/<?php echo $item->id ?>" class="btn" rel="twipsy" data-title="Activate"><i class="refresh"></i>Activate</a>
                         <?php endif ?>
                     </p>
                     <img class="rumor-image" src="<?php echo base_url() ?>uploads/original/<?php echo $item->thumbnail ?>" alt="">

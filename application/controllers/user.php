@@ -95,6 +95,8 @@ class User extends MY_Controller
                 }
             }
             
+            $this->session->set_flashdata('message', 'User saved');
+            
             redirect(base_url().'user');
         }
         $this->template->build('user/edit', $data);
@@ -108,6 +110,8 @@ class User extends MY_Controller
             $this->load->model('Users', 'model');
             
             $this->model->delete($id);
+            
+            $this->session->set_flashdata('message', 'User deleted');
         }
         
         redirect($_SERVER['HTTP_REFERER']);
@@ -124,6 +128,8 @@ class User extends MY_Controller
             $this->load->model('Users', 'model');
             
             $this->model->update(array('password'=>md5($_POST['password'])), $this->session->userdata('logged_in')->id);
+            
+            $this->session->set_flashdata('message', 'Password changed');
             
             redirect(base_url());
         }

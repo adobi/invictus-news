@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" style="overflow: hidden_">
     <head>
     	<title>Invictus News</title>
@@ -49,6 +49,8 @@
     	<script src="<?php echo base_url() ?>scripts/plugins/google-code-prettify/prettify.js"></script>    	
     	
     	<script src="<?php echo base_url() ?>scripts/plugins/charcounter/jquery.charcounter.js"></script>    	
+    	
+    	<!-- <script src="<?php echo base_url() ?>scripts/plugins/sisyphus/sisyphus.min.js"></script>    	 -->
     	
     </head>
     

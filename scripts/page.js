@@ -1,8 +1,65 @@
-﻿(function($) {
-	
+(function($) {
+    
 	$(function() {
+        App.fillSameFields = function() {
+            var elems = $('[id*=settings]'),
+                first = $(elems[0]);
+            /*
+            $('.sisyphus').nextAll('form').sisyphus({
+                timeout: 3,
+                onSave: function() {
+                    //console.log('saved');
+                }
+            });
+            */  
+            $.each(elems, function(i, el) {
+                var el = $(el);
+                //console.log(el);
+                el.find('.form-actions')
+                    .append(
+                        $('<a/>', {href:'javascript:void(0)', 'class':'btn'})
+                            .html('<i class="arrow-down"></i>Copy link text and url to next form')
+                            .bind('click', function() {
+                                
+                                //$.get(App.URL+'game_and_platform/sisyphus_forms/'+el.data('id'), function() {
+                                
+                                    var link = el.find('[name=link_text]').val(),
+                                        url = el.find('[name=link_url]').val(),
+                                        nextForms = el.nextAll('form:first');
+                                    
+                                    nextForms.find('[name=link_text]').val(link);
+                                    nextForms.find('[name=link_url]').val(url);
+                                    
+                                    /*nextForms.sisyphus({
+                                        timeout: 3,
+                                    })*/
+                                    
+                                    $('[data-countable=1]').trigger('charcounter.recount');
+                                    
+                                //})
+                                
+                                return false;
+                            })
+                    )
+                });
+        };
+        App.fillSameFields();
 
-	    
+        
+        App.showNotification = function(message) 
+        {
+            var self = $('#loading-global');
+            
+            self.html(message).show();
+    
+            setTimeout(function() {
+                self.hide();
+                self.html('Working...');
+    
+            }, 4000)
+            
+        };	
+            
         $('.datepicker').datepicker({
             dateFormat: 'yy-mm-dd',
             changeYear: true,
@@ -40,83 +97,6 @@
                     self.hide();
                 }, 1500)
             });
-	    
-        /*
-	    $('#rate-star').each(function(i, v) {
-	        var self = $(v);
-	        
-	        self.raty({
-	            path: App.URL + 'scripts/plugins/raty/img/',
-	            start: self.attr('data-rate'),
-	            scoreName: 'rate', 
-            });
-	    });
-	    
-	    
-	    $('.separator, .separator label').css('cursor', 'pointer');
-	    $('.section-content').hide();
-	    $('.section-content:first').show();
-	    $('body').delegate('.separator', 'click', function() {
-	        //$('.section-content').hide();
-	        $(this).next('.section-content:first').toggle();
-	    });
-	    
-			
-        $('.separator').find('strong').wrap('<a href="javascript:;"></a>');
-        $('.separator').find('strong').append('<span  style = " margin-left:2px;font-family:verdana;">»</span>');	    
-        
-        $( "#image-sortable" ).sortable({
-            //placeholder: "ui-state-highlight",
-            stop: function(event, ui) {
-                //console.log(event, ui);
-                //console.log($('#sortable').sortable('toArray'));
-                var name = $('.sortable-wrapper').find('[type=hidden]').attr('name'),
-                    value = $('.sortable-wrapper').find('[type=hidden]').attr('value');
-                
-                var data = {};
-                data['order'] = $('#image-sortable').sortable('toArray');
-                data[name] = value;
-                
-                $.post(App.URL+"image/update_order", data, function() {});
-            }
-        });
-		$( "#image-sortable" ).disableSelection();          
-
-        $( "#store-sortable" ).sortable({
-            //placeholder: "ui-state-highlight",
-            stop: function(event, ui) {
-                //console.log(event, ui);
-                //console.log($('#sortable').sortable('toArray'));
-                var name = $('.sortable-wrapper').find('[type=hidden]').attr('name'),
-                    value = $('.sortable-wrapper').find('[type=hidden]').attr('value');
-                
-                var data = {};
-                data['order'] = $('#store-sortable').sortable('toArray');
-                data[name] = value;
-                //console
-                $.post(App.URL+"store/update_order", data, function() {});
-            }
-        });
-		$( "#store-sortable" ).disableSelection();    
-
-
-        $( "#video-sortable" ).sortable({
-            //placeholder: "ui-state-highlight",
-            stop: function(event, ui) {
-                //console.log(event, ui);
-                //console.log($('#sortable').sortable('toArray'));
-                var name = $('.sortable-wrapper').find('[type=hidden]').attr('name'),
-                    value = $('.sortable-wrapper').find('[type=hidden]').attr('value');
-                
-                var data = {};
-                data['order'] = $('#video-sortable').sortable('toArray');
-                data[name] = value;
-                //console
-                $.post(App.URL+"video/update_order", data, function() {});
-            }
-        });
-		$( "#video-sortable" ).disableSelection();  
-		*/
         $('body').delegate('a[rel*=dialog]', 'click', function() {
             
             $('.dialog').remove();
@@ -162,15 +142,6 @@
             return false;
         }); 
         
-        //$('.pills').pills();
-        //$('.tabs').pills();
-        /*
-        if ($('#redactor').length)
-            $('#redactor').redactor({ lang: 'en' });
-            
-            
-        $(".fancybox").fancybox();
-        */    
         $(".chosen").chosen({
             no_results_text: "No results matched", 
         }); 
@@ -194,12 +165,6 @@
             select.trigger("liszt:updated");
         });  
         
-        //$('[id*=rumor_]').modal();
-        
-        //$('.new-rumor').parents('li:first').hover(function() { $('.new-rumor').css('opacity', 1) }, function() { $('.new-rumor').css('opacity', 0.25) })
-        //$('.settings').parents('li:first').hover(function() { $('.settings').css('opacity', 1) }, function() { $('.settings').css('opacity', 0.25) })
-        
-
         $('i.w').parents('li').hover(
 			function() { $(this).find('i.w').css('opacity', 1); }, 
 			function() { $(this).find('i.w').css('opacity', 0.25); }

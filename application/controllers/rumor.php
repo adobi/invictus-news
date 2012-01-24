@@ -61,7 +61,11 @@ class Rumor extends MY_Controller
         $this->form_validation->set_rules('games[]', 'Games', 'trim|required');
         $this->form_validation->set_rules('platforms[]', 'Platforms', 'trim|required');
         
-        if ($this->form_validation->run() && (!$item || !$item->thumbnail) &&isset($_FILES['thumbnail']['size']) && $_FILES['thumbnail']['size'] !== 0) {
+        if ($this->form_validation->run() && (
+                (($item && $item->thumbnail) || (!$item->thumbnail && isset($_FILES['thumbnail']['size']) && $_FILES['thumbnail']['size'] !== 0))
+                || (!$item  && isset($_FILES['thumbnail']['size']) && $_FILES['thumbnail']['size'] !== 0)
+            )
+        ) {
         
             if ($this->upload->do_upload('thumbnail')) {
                 
@@ -124,15 +128,17 @@ class Rumor extends MY_Controller
             
             $this->session->set_userdata('rumor_edited', true);
             
-            if (!$this->uri->segment(3)) {
-                redirect(base_url() . 'rumor/settings/'.$id);
-            }
+            $this->session->set_flashdata('message', 'Rumor saved, set up the settings');
             
-            redirect($_SERVER['HTTP_REFERER']);
+            //if (!$this->uri->segment(3)) {
+                redirect(base_url() . 'rumor/settings/'.$id);
+            //}
+            
+            //redirect($_SERVER['HTTP_REFERER']);
         } else {
             if ($_FILES && (!isset($_FILES['thumbnail']['size']) || $_FILES['thumbnail']['size'] === 0)) {
                 
-                $data['file_missing'] = 'Thumbnail is required';
+                $data['file_missing'] = 'The Thumbnail is required';
             }
         }
         $this->template->build('rumor/edit', $data);
@@ -149,6 +155,8 @@ class Rumor extends MY_Controller
             $this->bridge->delete(array('rumor_id'=>$id));
             
             $this->_deleteImage($id, true);
+            
+            $this->session->set_flashdata('message', 'Rumor deleted');
         }
         
         redirect($_SERVER['HTTP_REFERER']); 
@@ -161,6 +169,8 @@ class Rumor extends MY_Controller
         if ($id) {
             
             $this->_deleteImage($id);
+            
+            $this->session->set_flashdata('message', 'Image deleted');
         }
         
         redirect($_SERVER['HTTP_REFERER']);
@@ -188,6 +198,8 @@ class Rumor extends MY_Controller
         
         $this->rumor->update(array('active'=>1), $this->uri->segment(3));
         
+        $this->session->set_flashdata('message', 'Rumor activated');
+        
         redirect($_SERVER['HTTP_REFERER']);
     } 
 
@@ -196,6 +208,8 @@ class Rumor extends MY_Controller
         $this->load->model('Rumors', 'rumor');
         
         $this->rumor->update(array('active'=>0), $this->uri->segment(3));
+        
+        $this->session->set_flashdata('message', 'Rumor inactivated');
         
         redirect($_SERVER['HTTP_REFERER']);
     } 

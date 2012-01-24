@@ -9,7 +9,7 @@
 <?php if ($item): ?>
     
     <fieldset class="form-actions right" style="border-bottom:1px solid #ddd;">
-        <a href="<?php echo $_SERVER['HTTP_REFERER'] ?>" class="btn primary" style="float:left;"><i class="arrow-left"></i>Go back</a>
+        <a href="<?php echo @$_SERVER['HTTP_REFERER'] ?>" class="btn primary" style="float:left;"><i class="arrow-left"></i>Go back</a>
 
     
         <a class="btn primary" href="<?php echo base_url() ?>rumor/settings/<?php echo $item->id ?>"><i class="cog"></i>Settings</a>

@@ -43,12 +43,12 @@
             .html($('<span />', {'class': 'char-counter', 'html': this.options.limit}))
         );
         
-        self.on('keyup focus blur', function() {
+        self.on('charcounter.recount keyup change focus blur', function(e) {
             
             if (that.options.notAllowOverflow) {
                 
                 if (!that.handle($(this).val())) {
-                    console.log($(this).val().substring(0, that.options.limit));
+                    //console.log($(this).val().substring(0, that.options.limit));
                     $(this).val($(this).val().substring(0, that.options.limit));
                 }
             } else {
