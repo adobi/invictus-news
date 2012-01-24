@@ -52,16 +52,18 @@ class Game_and_platform extends MY_Controller
                 //$this->model->insert($_POST);
             }
             
-            $this->session->set_flashdata('message', 'Item saved, don\'t forget to save the other ones too');
+            $this->session->set_flashdata('message', 'Item saved');
             
-            //if (!$this->input->is_ajax_request()) {
+            
+            
+            if (!$this->model->isCompletedForRumor($item->rumor_id)) {
                 
                 redirect($_SERVER['HTTP_REFERER']);
-            //}
+            } else {
+                redirect(base_url().'dashboard');
+            }
             
         } else {
-            
-            $this->session->set_flashdata('message', validation_errors());
             
             if ($_POST) {
                 

@@ -57,6 +57,9 @@ class Platform extends MY_Controller
             } else {
                 $this->model->insert($_POST);
             }
+            
+            $this->session->set_flashdata('message', 'Platform saved');
+            
             redirect(base_url().'platform');
         }
         $this->template->build('platform/edit', $data);
@@ -70,6 +73,8 @@ class Platform extends MY_Controller
             $this->load->model('Platforms', 'model');
             
             $this->model->delete($id);
+            
+            $this->session->set_flashdata('message', 'Platform deleted');
         }
         
         redirect($_SERVER['HTTP_REFERER']);

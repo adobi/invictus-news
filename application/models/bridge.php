@@ -41,4 +41,17 @@ class Bridge extends MY_Model
         
         return array_unique($return);
     }
+    
+    public function isCompletedForRumor($rumorId) 
+    {
+        if (!$rumorId) return false;
+        
+        $allItems = count($this->fetchForRumor($rumorId));
+        
+        $sql = "select id from in_bridge where rumor_id = $rumorId and link_text is not null and link_url is not null and image is not null";
+
+        $completedItems = count($this->execute($sql));
+        
+        return $allItems === $completedItems;
+    }
 }

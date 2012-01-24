@@ -83,9 +83,10 @@ class Rumor extends MY_Controller
             $platforms = $_POST['platforms'];
             unset($_POST['platforms']);
             
-            $insert = false; 
+            $insert = false; $update = false;
             if ($id) {
                 $this->model->update($_POST, $id);
+                $update = true;
             } else {
                 
                 $_POST['created'] = date('Y-m-d H:i:s', time());
@@ -128,11 +129,13 @@ class Rumor extends MY_Controller
             
             $this->session->set_userdata('rumor_edited', true);
             
-            $this->session->set_flashdata('message', 'Rumor saved, set up the settings');
+            $this->session->set_flashdata('message', 'Rumor saved');
             
-            //if (!$this->uri->segment(3)) {
+            if (!$update) {
                 redirect(base_url() . 'rumor/settings/'.$id);
-            //}
+            } else {
+                redirect(base_url() . 'dashboard');
+            }
             
             //redirect($_SERVER['HTTP_REFERER']);
         } else {
