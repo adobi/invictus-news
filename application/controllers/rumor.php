@@ -61,7 +61,7 @@ class Rumor extends MY_Controller
         $this->form_validation->set_rules('games[]', 'Games', 'trim|required');
         $this->form_validation->set_rules('platforms[]', 'Platforms', 'trim|required');
         
-        if ($this->form_validation->run()) {
+        if ($this->form_validation->run() && (!$item || !$item->thumbnail) &&isset($_FILES['thumbnail']['size']) && $_FILES['thumbnail']['size'] !== 0) {
         
             if ($this->upload->do_upload('thumbnail')) {
                 
@@ -129,7 +129,12 @@ class Rumor extends MY_Controller
             }
             
             redirect($_SERVER['HTTP_REFERER']);
-        } 
+        } else {
+            if ($_FILES && (!isset($_FILES['thumbnail']['size']) || $_FILES['thumbnail']['size'] === 0)) {
+                
+                $data['file_missing'] = 'Thumbnail is required';
+            }
+        }
         $this->template->build('rumor/edit', $data);
     }
     

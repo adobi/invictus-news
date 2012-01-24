@@ -1,7 +1,8 @@
 
-<?php if (validation_errors()): ?>
+<?php if (validation_errors() || isset($file_missing)): ?>
     <div class="alert-message block-message error">
         <?php echo validation_errors() ?>
+        <?php echo $file_missing; ?>
     </div>
 <?php endif ?>
 
@@ -38,7 +39,7 @@
     <fieldset class="control-group">
         <label class="control-label" for="available_from">Available from</label>
         <div class="controls">
-            <input type="text" name = "available_from" id = "available_from" class = "datepicker input-large" value = "<?php echo $_POST ? @$_POST['available_from'] : ($item ? $item->available_from : '') ?>"/>
+            <input type="text" name = "available_from" id = "available_from" class = "datepicker input-large" value = "<?php echo $_POST ? @$_POST['available_from'] : ($item ? to_date($item->available_from) : '') ?>"/>
         </div>
     </fieldset>
     <fieldset class="control-group">
@@ -77,6 +78,11 @@
                 </p>
             <?php else: ?>
                 <input type="file" name = "thumbnail" value = "" />
+                <p class="help-block">size of the image is <strong>50x50</strong>. We don't resize it!</p>
+
+                <p style="margin-top:10px;">
+                    <img src="http://placehold.it/50x50" alt="">
+                </p>
             <?php endif ?>
         </div>
     </fieldset>  

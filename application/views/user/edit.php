@@ -29,10 +29,10 @@
         <label class="control-label" for="role">Role</label>
         <div class="controls">
             <label class="radio">
-                <input type="radio" name = "role" value = "1" <?php echo $item && $item->role === '1' ? 'checked="checked"' : '' ?>/> <span>admin</span>
+                <input type="radio" name = "role" value = "1" <?php echo $item && $item->role === '1' ? 'checked="checked"' : '' ?>/> <span>administrator</span>
             </label>
             <label class="radio">
-                <input type="radio" name = "role" value = "2" <?php echo $item &&  $item->role === '2' ? 'checked="checked"' : '' ?>/> <span>other user</span>
+                <input type="radio" name = "role" value = "2" <?php echo $item &&  $item->role === '2' ? 'checked="checked"' : '' ?>/> <span>user</span>
             </label>
         </div>
     </fieldset>  

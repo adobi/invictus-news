@@ -1,10 +1,10 @@
+<h1 style="margin-bottom:15px;">Recent news</h1>
 
 <?php echo form_open('', array('id'=>'edit-form', 'class'=>'horizontal-form')) ?>
 
-        <legend>
-            
+        <legend style="background:#f5f5f5; padding:5px;">
             Filter news
-            <p class="pull-right" style="position:relative; top:0px;">
+            <p class="pull-left" style="position:relative; top:0px;margin-right:10px;">
                 <a href="#" rel = "twipsy" data-title="Toggle options" class="news-filter-options btn"><i style="margin-right:0px;" class="arrow-<?php echo ($_POST) ? 'up' : 'down' ?>"></i></a>
             </p>
         </legend>
@@ -35,7 +35,6 @@
 <?php echo form_close() ?>
 
 <?php if ($items): ?>
-    <h1>Recent news</h1>
     <ul class="thumbnails" style="margin-top:20px;">
         <?php foreach ($items as $item): ?>
             
@@ -43,9 +42,9 @@
                 <div class="thumbnail">
                     <p class="right">
                         <?php if ($item->active === '1'): ?>
-                            <a href="<?php echo base_url() ?>rumor/inactivate/<?php echo $item->id ?>" class="btn" rel="twipsy" data-title="Inactivate"><i class="refresh" style="margin-right:0"></i></a>
+                            <a href="<?php echo base_url() ?>rumor/inactivate/<?php echo $item->id ?>" class="btn" rel="twipsy" data-title="Inactivate"><i class="refresh" style="margin-right:0"></i>Inactivate</a>
                         <?php else: ?>
-                            <a href="<?php echo base_url() ?>rumor/activate/<?php echo $item->id ?>" class="btn" rel="twipsy" data-title="Activate"><i class="refresh" style="margin-right:0"></i></a>
+                            <a href="<?php echo base_url() ?>rumor/activate/<?php echo $item->id ?>" class="btn" rel="twipsy" data-title="Activate"><i class="refresh" style="margin-right:0"></i>Activate</a>
                         <?php endif ?>
                     </p>
                     <img class="rumor-image" src="<?php echo base_url() ?>uploads/original/<?php echo $item->thumbnail ?>" alt="">

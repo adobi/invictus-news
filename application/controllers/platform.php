@@ -57,7 +57,7 @@ class Platform extends MY_Controller
             } else {
                 $this->model->insert($_POST);
             }
-            redirect($_SERVER['HTTP_REFERER']);
+            redirect(base_url().'platform');
         }
         $this->template->build('platform/edit', $data);
     }

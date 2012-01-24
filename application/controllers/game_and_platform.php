@@ -33,7 +33,7 @@ class Game_and_platform extends MY_Controller
         $data['item'] = $item;
         
         $this->form_validation->set_rules('link_text', 'Link text', 'trim|required|max_length['.LINK_TEXT_MAX_LENGTH.']');
-        $this->form_validation->set_rules('link_url', 'Link url', 'trim|required|max_length['.LINK_URL_MAX_LENGTH.']');
+        $this->form_validation->set_rules('link_url', 'Link url', 'trim|required');
         
         if ($this->form_validation->run()) {
             if ($this->upload->do_upload('image')) {

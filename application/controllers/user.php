@@ -95,7 +95,7 @@ class User extends MY_Controller
                 }
             }
             
-            redirect($_SERVER['HTTP_REFERER']);
+            redirect(base_url().'user');
         }
         $this->template->build('user/edit', $data);
     }

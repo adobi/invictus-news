@@ -19,7 +19,7 @@
                 <tr>
                     <td class="span1 center"><strong><?php echo $i++; ?></strong></td>
                     <td><?php echo $item->username ?></td>
-                    <td><?php echo $item->role === '1' ? 'admin' : 'other user' ?></td>
+                    <td><?php echo $item->role === '1' ? 'administrator' : 'user' ?></td>
                     <td class="span3 center">
                         <a href="<?php echo base_url() ?>user/edit/<?php echo $item->id ?>" class="btn success"><i class="edit"></i>Edit</a>
                         <a href="<?php echo base_url() ?>user/delete/<?php echo $item->id ?>" class="btn"><i class="trash"></i>Delete</a>

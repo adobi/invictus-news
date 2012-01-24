@@ -42,8 +42,8 @@ define('ITEMS_PER_PAGE', 6);
 
 define('TITLE_MAX_LENGTH', 30);
 define('DESCRIPTION_MAX_LENGTH', 120);
-define('LINK_TEXT_MAX_LENGTH', 25);
-define('LINK_URL_MAX_LENGTH', 20);
+define('LINK_TEXT_MAX_LENGTH', 15);
+//define('LINK_URL_MAX_LENGTH', 20);
 
 
 /* End of file constants.php */
