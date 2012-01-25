@@ -5,8 +5,9 @@
     </div>
 <?php endif ?>
 <?php echo form_open('', array('class'=>'horizontal-form')) ?>
-        
-	    <legend>Change password</legend>
+        <fieldset>
+	        <legend>Change password</legend>
+        </fieldset>
     
         <fieldset class="control-group">
             <label class="control-label" for="password">Password</label>

@@ -1,13 +1,15 @@
 <h1 style="margin-bottom:15px;">Recent news</h1>
 
 <?php echo form_open('', array('id'=>'edit-form', 'class'=>'horizontal-form')) ?>
-
+        <fieldset>
+            
         <legend style="background:#f5f5f5; padding:17px 20px 18px; border-top:1px solid #ddd; border-bottom:1px solid #ddd;">
             Filter news
             <p class="pull-left" style="position:relative; top:0px;margin-right:10px;">
                 <a href="#" rel = "twipsy" data-title="Toggle options" class="news-filter-options btn"><i style="margin-right:0px;" class="arrow-<?php echo ($_POST) ? 'up' : 'down' ?>"></i></a>
             </p>
         </legend>
+        </fieldset>
         <fieldset class="control-group" <?php echo ($_POST) ? '' : ' style="display:none"' ?>>
             <label class="control-label" for="games[]">Games</label>
             <div class="controls">

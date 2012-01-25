@@ -54,6 +54,8 @@
     	
     	<!-- <script src="<?php echo base_url() ?>scripts/plugins/sisyphus/sisyphus.min.js"></script>    	 -->
     	
+    	<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
+    	
     </head>
     
     <body>    

@@ -17,13 +17,15 @@
 <?php endif ?>
 
 <?php echo form_open_multipart('', array('id'=>'edit-form', 'class'=>'horizontal-form')) ?>
-    <legend>
-        <?php if ($item): ?>
-            Edit <?php echo $item->title ?>
-        <?php else: ?>
-            New rumor
-        <?php endif ?>
-    </legend>
+    <fieldset>
+        <legend>
+            <?php if ($item): ?>
+                Edit <?php echo $item->title ?>
+            <?php else: ?>
+                New rumor
+            <?php endif ?>
+        </legend>
+    </fieldset>
     <fieldset class="control-group">
         <label class="control-label" for="title">Title</label>
         <div class="controls">

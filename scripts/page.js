@@ -174,8 +174,9 @@
 		    
 		    var self = $(this), i = self.find('i'), klass = i.attr('class');
 		    
-		    self.parents('legend').nextAll('fieldset').toggle();
+		    self.parents('fieldset:first').nextAll('fieldset').toggle();
 		    
+		    		    
 		    if (/down/.test(klass)) {
 
 		        i.removeClass('arrow-down').addClass('arrow-up');

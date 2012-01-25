@@ -5,14 +5,16 @@
     </div>
 <?php endif ?>
 
-    <?php echo form_open('', array('id'=>'edit-form', 'class'=>'horizontal-form')) ?>    
-        <legend>
-            <?php if ($item): ?>
-                Edit
-            <?php else: ?>
-                New
-            <?php endif ?>
-        </legend>
+    <?php echo form_open('', array('id'=>'edit-form', 'class'=>'horizontal-form')) ?>
+        <fieldset>
+            <legend>
+                <?php if ($item): ?>
+                    Edit
+                <?php else: ?>
+                    New
+                <?php endif ?>
+            </legend>
+        </fieldset>    
         <fieldset class="control-group">
             <label class="control-label" for="name">Name</label>
             <div class="controls">

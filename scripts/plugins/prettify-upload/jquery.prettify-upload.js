@@ -76,7 +76,8 @@
         //$('body').delegate('input[type=file]', 'change', function() {
         $(this.element).bind('change', function() {
             var self = $(this);
-            self.parents('.input-file-wrapper')
+            alert(self.files[0].name);
+            self.parents('.input-file-wrapper:first')
                 .after($('<p />')
                     .html(self[0].files[0].name)
                     .append($('<a />', {href:'javascript:void(0)', 'class': 'btn danger input-file-remove'})

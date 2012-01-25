@@ -15,7 +15,9 @@
 
 <?php echo form_open('', array('class'=>'horizontal-form')) ?>
         
-	    <legend>Please login</legend>
+	    <fieldset>
+	        <legend>Please login</legend>
+	    </fieldset>
     
         <fieldset class="control-group">
             <label class="control-label" for="name">Name</label>
