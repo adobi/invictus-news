@@ -31,7 +31,18 @@
             <div class="controls">
                 <?php echo form_dropdown('platform', $platforms, $_POST ? $_POST['platform'] : '', 'class="chosen input-xlarge" data-placeholder="Choose a platform..."') ?>
             </div>
-        </fieldset>    
+        </fieldset> 
+        <fieldset class="control-group span6">
+            <label class="control-label" for="platform"></label>
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox" value="1" name="all_news" <?php echo isset($_POST['all_news']) && $_POST['all_news'] ? 'checked="checked"' : '' ?>>
+                    Fetch all news 
+                </label>
+            </div>
+        </fieldset> 
+        
+           
     </div>
     <fieldset class="form-actions">
         <button class="btn primary"> <i class="time"></i>Run query</button> &nbsp; <a class="btn" href="<?php echo base_url() ?>/<?php echo $this->uri->segment(1) ?>">Cancel</a>
@@ -42,11 +53,10 @@
 
 <legend>Request url</legend>
 <pre class="prettyprint">
-        <?php echo base_url() ?>api/get_news/<?php echo $_POST['game'] ?>/<?php echo $_POST['platform'] ?>
+        <?php echo base_url() ?>api/get_news/<?php echo $_POST['game'] ?>/<?php echo $_POST['platform'] ?>/<?php echo isset($_POST['all_news']) && $_POST['all_news'] ? 'all' : '' ?>
 </pre>
 
 <legend>Result</legend>
-
 
 
 <pre class="prettyprint linenums">

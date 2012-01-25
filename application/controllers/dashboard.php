@@ -28,6 +28,8 @@ class Dashboard extends MY_Controller
         
         $result = $this->model->fetchForUser($this->session->userdata('logged_in')->id, $_POST, $this->uri->segment(3));
         
+        $this->session->set_userdata('current_dashboard_page', $this->uri->segment(3));
+        
         $data['items'] = $result['result'];
         
         $data['pagination_links'] = $this->paginate('dashboard/index/', 3, $result['count']);

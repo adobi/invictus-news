@@ -157,6 +157,13 @@ table thead th {
     opacity:0.25;
 }
 
+.mainpage {
+    background-position: -233px -110px;
+    background-image: url('../images/td_web_sprite_icons.png')!important;
+    width: 21px;
+    height: 20px
+}
+
 .nav .active .new-rumor, .settings, .nav .active .w {
     opacity:1!important;
 }

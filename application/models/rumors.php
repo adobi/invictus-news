@@ -143,7 +143,7 @@ class Rumors extends MY_Model
         $thumbXML = "\n<thumbnail>$thumb</thumbnail>\n";
         
         $newsXML = $this->toXML($newsResult, array('root'=>'news', 'element'=>'item'));
-        
+        //dump($newsXML); die;
         return "<response>$baseUrl$thumbXML$newsXML\n</response>";
     }
     
@@ -162,8 +162,8 @@ class Rumors extends MY_Model
                     $this->_name r 
                     join in_bridge b on r.id = b.rumor_id and b.game_id = $game and b.platform_id = $platform 
                 where r.active = 1 
-                order by created desc 
-                limit $count";
+                order by created desc ";
+        if (is_numeric($count)) $sql .= " limit $count";
         //dump($sql); die;
         return $this->execute($sql, true);
     }

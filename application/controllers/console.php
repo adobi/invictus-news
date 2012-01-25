@@ -38,7 +38,10 @@ class Console extends MY_Controller
         if ($this->form_validation->run()) {
             
             $game = $_POST['game']; $platform = $_POST['platform'];
-            $result = file_get_contents(base_url()."api/get_news/$game/$platform");
+            $all = isset($_POST['all_news']) && $_POST['all_news'] ? 'all' : '';
+            
+            $result = file_get_contents(base_url()."api/get_news/$game/$platform/$all");
+            
         }
         $data['result'] = $result;
         

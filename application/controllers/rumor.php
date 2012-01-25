@@ -134,7 +134,7 @@ class Rumor extends MY_Controller
             if (!$update) {
                 redirect(base_url() . 'rumor/settings/'.$id);
             } else {
-                redirect(base_url() . 'dashboard');
+                redirect(base_url() . 'dashboard/index/'.$this->session->userdata('current_dashboard_page'));
             }
             
             //redirect($_SERVER['HTTP_REFERER']);
