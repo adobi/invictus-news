@@ -66,6 +66,7 @@
             <div class="container">
               <a href="<?php echo  base_url() ?>" class="brand">Invictus News</a>
               <ul class="nav">
+                  <li <?php echo $this->uri->segment(1) === 'dashboard' || !$this->uri->segment(1) ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>"><i class="w home-w"></i>Recent news</a></li>
                   <li <?php echo $this->uri->segment(1) === 'rumor' && $this->uri->segment(2) === 'edit' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>rumor/edit"><i class=" w new-rumor"></i>Create a rumor</a></li>
                   <?php if ($this->session->userdata('logged_in')->role === '1'): ?>
                       <li <?php echo $this->uri->segment(1) === 'platform' ? 'class="active"' : '' ?>><a href="<?php echo base_url() ?>platform">Platforms</a></li>

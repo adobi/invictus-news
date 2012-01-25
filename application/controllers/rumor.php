@@ -62,7 +62,7 @@ class Rumor extends MY_Controller
         $this->form_validation->set_rules('platforms[]', 'Platforms', 'trim|required');
         
         if ($this->form_validation->run() && (
-                (($item && $item->thumbnail) || (!$item->thumbnail && isset($_FILES['thumbnail']['size']) && $_FILES['thumbnail']['size'] !== 0))
+                (($item && $item->thumbnail) || ($item && !$item->thumbnail && isset($_FILES['thumbnail']['size']) && $_FILES['thumbnail']['size'] !== 0))
                 || (!$item  && isset($_FILES['thumbnail']['size']) && $_FILES['thumbnail']['size'] !== 0)
             )
         ) {

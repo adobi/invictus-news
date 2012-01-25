@@ -73,7 +73,7 @@
                                 &nbsp;
                             <?php endif ?>
                         </h6>
-                        <p style="height:120px;margin-top:10px;">
+                        <p style="height:80px;margin-top:10px;word-wrap:break-word">
                             <?php if (strlen($item->description) >= 250): ?>
                                 <?php echo substr($item->description, 0, 250) ?>... <a href="#rumor_<?php echo $item->id ?>" rel="popover" data-title="<?php echo $item->title ?>" data-content="<?php echo $item->description ?>" _data-toggle="modal"><i class="arrow-right"></i></a>
                             <?php else: ?>
