@@ -187,11 +187,12 @@ table thead th {
     font-size:16px;
     margin-left:20px;
 }
-
+/*
 .pagination a:hover, .pagination .active a {
   background-color: #FFDBED;
   background-color: rgba(141, 192, 219, 0.25);
 }
+*/
 
 /*
 .pagination a {
