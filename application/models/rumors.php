@@ -142,8 +142,8 @@ class Rumors extends MY_Model
         $thumb = $this->find($news[0]->id)->thumbnail;
         $thumbXML = "\n<thumbnail>$thumb</thumbnail>\n";
         
-        $newsXML = $this->toXML($newsResult, array('root'=>'news', 'element'=>'item'));
-        //dump($newsXML); die;
+        $newsXML = str_replace('&#45;', '-', $this->toXML($newsResult, array('root'=>'news', 'element'=>'item')));
+        
         return "<response>$baseUrl$thumbXML$newsXML\n</response>";
     }
     

@@ -15,9 +15,6 @@ class Api extends MY_Controller
     
     public function get_thumbnail()
     {
-
-        
-        dump($game);
     }
     
     public function get_news()
