@@ -17,7 +17,7 @@
     var pluginName = 'prettifyUpload',
         defaults = {
             buttonClass:'btn info',
-            iconClass:'picture',
+            iconClass:'icon picture',
             text:'select a file',
             
         };
@@ -76,12 +76,11 @@
         //$('body').delegate('input[type=file]', 'change', function() {
         $(this.element).bind('change', function() {
             var self = $(this);
-            alert(self.files[0].name);
-            self.parents('.input-file-wrapper:first')
+            self.parents('.input-file-wrapper')
                 .after($('<p />')
                     .html(self[0].files[0].name)
                     .append($('<a />', {href:'javascript:void(0)', 'class': 'btn danger input-file-remove'})
-                        .html('<i class="trash"></i>remove')
+                        .html('<i class="icon trash"></i>remove')
                         .css('margin-left', '10px')
                         .bind('click', function() {
                             $(this).parent().remove();

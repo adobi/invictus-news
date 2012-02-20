@@ -74,6 +74,18 @@ class Rumor extends MY_Controller
                     $this->_deleteImage($id);
                 }
                 
+    	  	    $this->load->config('upload');
+    	  	    
+    	  	    $data = $this->upload->data();                
+                /*
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = $this->config->item('upload_path') . $data['file_name'];
+                $config['maintain_ratio'] = false;
+                $config['width'] = 50;
+                $config['height'] = 50;
+                $this->load->library('image_lib', $config);
+                $this->image_lib->resize();                
+                */
                 $_POST['thumbnail'] = $this->upload->file_name;
             }            
             

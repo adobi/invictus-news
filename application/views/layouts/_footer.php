@@ -15,7 +15,7 @@
         <?php if ($this->session->flashdata('message')): ?>
             <script type="text/javascript">
                 $(function() {
-                    App.showNotification("<?php echo $this->session->flashdata("message") ?>")
+                    App.showNotification('<?php echo $this->session->flashdata("message") ?>')
                 });
             </script>
         <?php endif ?>

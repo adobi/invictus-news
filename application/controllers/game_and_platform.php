@@ -33,9 +33,12 @@ class Game_and_platform extends MY_Controller
         $data['item'] = $item;
         
         $this->form_validation->set_rules('link_text', 'Link text', 'trim|required|max_length['.LINK_TEXT_MAX_LENGTH.']');
-        $this->form_validation->set_rules('link_url', 'Link url', 'trim|required');
+        $this->form_validation->set_rules('link_url', 'Link url', 'trim|required|callback_check_http');
         
+        $error = '';
+        $redirect = false;
         if ($this->form_validation->run()) {
+            //dump($this->upload->do_upload('image')); die;
             if ($this->upload->do_upload('image')) {
                 
                 if ($id) {
@@ -44,49 +47,69 @@ class Game_and_platform extends MY_Controller
                 }
                 
                 $_POST['image'] = $this->upload->file_name;
-            } 
-                    
+            } else {
+                if ($item && !$item->image)
+                    $error .= '<p>The file field is required</p>';
+            }
+             
+            $update = 0;       
             if ($id) {
+                
+                if (false === strpos($_POST['link_url'], 'http://')) {
+                    $_POST['link_url'] = 'http://'.$_POST['link_url'];
+                }
+                
                 $this->model->update($_POST, $id);
+                
+                //$update = 1;
             } else {
                 //$this->model->insert($_POST);
             }
             
-            $this->session->set_flashdata('message', 'Item saved');
+            //$this->session->set_flashdata('message', 'Item saved');
             
             
-            
+            $finished = false;
             if (!$this->model->isCompletedForRumor($item->rumor_id)) {
                 
-                redirect($_SERVER['HTTP_REFERER']);
+                //redirect($_SERVER['HTTP_REFERER']);
+                
+                //$redirect = 1;
+                //$finished = true;
             } else {
-                redirect(base_url().'dashboard');
+                //redirect(base_url().'dashboard');
+                
+                //$redirect = 2;
             }
             
         } else {
             
+            $error .= validation_errors();
+            
             if ($_POST) {
                 
-                redirect($_SERVER['HTTP_REFERER']);
+                //redirect($_SERVER['HTTP_REFERER']);
+                
+                $redirect = 1;
             }
         }
-    }
-    /*
-    public function sisyphus_forms()
-    {
-        $forms = $this->session->userdata('sisyphus_forms');
         
-        if (!$forms) {
-            $forms = array();
+        //dump($item, $error, $redirect); die;
+        
+        //dump($error); dump($redirect);die;
+        //$this->session->set_flashdata('error', $error);
+        
+        //dump(str_replace("\n", '', $error)); die;
+        
+        if ($error) {
+            $this->session->set_flashdata('message', str_replace("\n", '', $error));
+        } else {
+            $this->session->set_flashdata('message', 'Item saved');
         }
+
         
-        $forms[] = $this->uri->segment(3);
-        
-        $this->session->set_userdata('sisyphus_forms', $forms);
-        
-        die;
+        redirect($_SERVER['HTTP_REFERER']);
     }
-    */
     
     public function delete()
     {

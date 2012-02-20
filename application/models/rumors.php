@@ -144,6 +144,8 @@ class Rumors extends MY_Model
         
         $newsXML = str_replace('&#45;', '-', $this->toXML($newsResult, array('root'=>'news', 'element'=>'item')));
         
+        //$newsXML = str_replace("&apos;", "'", $newsXML);
+        
         return "<response>$baseUrl$thumbXML$newsXML\n</response>";
     }
     

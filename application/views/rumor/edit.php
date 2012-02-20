@@ -1,3 +1,9 @@
+<style type="text/css">
+    .label {
+        font-size:1.4em
+    }
+</style>
+
 
 <?php if (validation_errors() || isset($file_missing)): ?>
     <div class="alert-message block-message error">
@@ -71,7 +77,7 @@
                 <ul class="thumbnails">
                     <li>
                         <a href="#" class="thumbnail">
-                            <img src="<?php echo base_url() ?>uploads/original/<?php echo $item->thumbnail ?>" alt="" class="thumbnail"/>
+                            <img src="<?php echo base_url() ?>uploads/original/<?php echo $item->thumbnail ?>" alt=""/>
                         </a>
                     </li>
                 </ul>
@@ -80,7 +86,7 @@
                 </p>
             <?php else: ?>
                 <input type="file" name = "thumbnail" value = "" />
-                <p class="help-block">size of the image is <strong>50x50</strong>. We don't resize it!</p>
+                <p class="help-block">The size of the image is <span class="label important">50x50</span> for <strong>phones</strong>, <span class="label important">162x162</span> for <strong>tablets</strong>. <span class="label important">We don't resize it!</span></p>
 
                 <p style="margin-top:10px;">
                     <img src="http://placehold.it/50x50" alt="">

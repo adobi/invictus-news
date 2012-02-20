@@ -347,6 +347,7 @@
             // Files are accepted if either the file type or the file name
             // matches against the acceptFileTypes regular expression, as
             // only browsers with support for the File API report the type:
+
             if (!(this.options.acceptFileTypes.test(file.type) ||
                     this.options.acceptFileTypes.test(file.name))) {
                 return 'acceptFileTypes';

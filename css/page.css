@@ -95,6 +95,10 @@
     border-bottom-right-radius:5px;
 }
 
+#loading-global p {
+    font-weight:bold;
+}
+
 
 .clearfix:nth-child(even) {
     background:#fafafa;
@@ -141,6 +145,8 @@ table thead th {
 
 .rumor-image {
     margin:0 auto;
+    width:50px;
+    height:50px;
 }
 
 .new-rumor {
