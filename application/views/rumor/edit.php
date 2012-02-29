@@ -14,10 +14,14 @@
 
 <?php if ($item): ?>
     
-    <fieldset class="form-actions right" style="border-bottom:1px solid #ddd;">
+    <fieldset class="form-actions right <?php echo $item->active === '1' ? 'inactive-rumor' : 'active-rumor' ?>" style="border-bottom:1px solid #ddd;">
         <a href="<?php echo @$_SERVER['HTTP_REFERER'] ?>" class="btn primary" style="float:left;"><i class="arrow-left"></i>Go back</a>
 
-    
+        <?php if ($item->active === '1'): ?>
+            <a href="<?php echo base_url() ?>rumor/inactivate/<?php echo $item->id ?>" class="btn" rel="twipsy" data-title="Inactivate"><i class="refresh"></i>Inactivate</a>
+        <?php else: ?>
+            <a href="<?php echo base_url() ?>rumor/activate/<?php echo $item->id ?>" class="btn" rel="twipsy" data-title="Activate"><i class="refresh"></i>Activate</a>
+        <?php endif ?>    
         <a class="btn primary" href="<?php echo base_url() ?>rumor/settings/<?php echo $item->id ?>"><i class="cog"></i>Settings</a>
     </fieldset>
 <?php endif ?>
@@ -86,12 +90,12 @@
                 </p>
             <?php else: ?>
                 <input type="file" name = "thumbnail" value = "" />
-                <p class="help-block">The size of the image is <span class="label important">50x50</span> for <strong>phones</strong>, <span class="label important">162x162</span> for <strong>tablets</strong>. <span class="label important">We don't resize it!</span></p>
-
                 <p style="margin-top:10px;">
                     <img src="http://placehold.it/50x50" alt="">
                 </p>
             <?php endif ?>
+            <p class="help-block">The size of the image is <span class="label important">200x200</span> for <strong>phones</strong>, <span class="label important">200x200</span> for <strong>tablets</strong>. <span class="label important">We don't resize it!</span></p>
+
         </div>
     </fieldset>  
     <!-- 

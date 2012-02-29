@@ -4,10 +4,11 @@
         defaults = {
             limit: 140,
             warning: 15,
-            warningColor: '#600',
-            exceededColor: '#e00',
-            defaultColor: '#aaa',
+            warningClass: 'label-warning',
+            exceededClass: 'label-important',
+            defaultClass: 'label-info',
             notAllowOverflow: true,
+            fontSize: '1.4em',
         };
 
     function Charcounter( element, options ) 
@@ -32,15 +33,19 @@
         
         if (self.data('warning')) that.options.limit = self.data('warning');
 
-        self.parent().append($('<p />')
+        self.after($('<p />')
             .css({
-                'width': width,
-                'text-align': 'right',
-                'margin-top': '10px',
-                'color': this.options.defaultColor,
-                'font-size': '1.6em',
+                //'width': width,
+                //'text-align': 'right',
+                //'margin-top': '10px',
+                //'color': this.options.defaultColor,
+                'position':'relative',
+                'top':'1px',
+                'left':'5px',
+                'display':'inline',
+                
             })
-            .html($('<span />', {'class': 'char-counter', 'html': this.options.limit}))
+            .html($('<span />', {'class': 'label char-counter', 'html': this.options.limit}).addClass(this.options.defaultClass).css('font-size',this.options.fontSize))
         );
         
         self.on('charcounter.recount keyup change focus blur', function(e) {
@@ -70,19 +75,20 @@
         
         
         if (val <= this.options.limit) {
-            span.css('color', this.options.defaultColor);
-            
+            //span.css('color', this.options.defaultColor);
+            span.removeClass(this.options.exceededClass).removeClass(this.options.warningClass).addClass(this.options.defaultClass);
             flag = true;
         }
         
         if (val < this.options.warning) {
-            span.css('color', this.options.warningColor);
-            
+            //span.css('color', this.options.warningColor);
+            span.removeClass(this.options.defaultClass).addClass(this.options.warningClass);
             flag = true;
         }
         
         if (val <= 0) {
-            span.css('color', this.options.exceededColor);
+            //span.css('color', this.options.exceededColor);
+            span.removeClass(this.options.warningClass).addClass(this.options.exceededClass)
             
             flag = false;
             val = 0;

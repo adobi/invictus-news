@@ -169,4 +169,59 @@ class Rumors extends MY_Model
         //dump($sql); die;
         return $this->execute($sql, true);
     }
+    
+    public function duplicate($id)
+    {
+        if (!$id) return false;
+        
+        $item = $this->find($id);
+        
+        if (!$item) return false;
+        
+        $rumorCopy = array();
+        $rumorCopy['title'] = $item->title;
+        $rumorCopy['description'] = $item->description;
+        $rumorCopy['created'] = date('Y-m-d H:i:s');
+        $rumorCopy['active'] = 0;
+        $rumorCopy['thumbnail'] = $this->_duplicateImage($item->thumbnail);
+        
+        $rumorCopyId = $this->insert($rumorCopy);
+        
+        $this->load->model('Bridge', 'bridge');
+        
+        $settings = $this->bridge->fetchForRumor($item->id);
+        
+        if (!$settings) return $rumorCopyId;
+        
+        foreach ($settings as $s) {
+            $settingsCopy = array();
+            $settingsCopy['rumor_id'] = $rumorCopyId;
+            $settingsCopy['game_id'] = $s->game_id;
+            $settingsCopy['platform_id'] = $s->platform_id;
+            $settingsCopy['link_text'] = $s->link_text;
+            $settingsCopy['link_url'] = $s->link_url;
+            $settingsCopy['image'] = $this->_duplicateImage($s->image);
+            
+            $this->bridge->insert($settingsCopy);
+        }
+        
+        return $rumorCopyId;
+    }
+    
+    private function _duplicateImage($image) 
+    {
+        if (!$image) return false;
+        
+        $imageNameParts = explode('_', $image);
+        
+        $imageNameParts[0] = time();
+        
+        $newImageName = implode('_', $imageNameParts);
+        
+        $this->config->load('upload');
+        
+        copy($this->config->item('upload_path').$image, $this->config->item('upload_path').$newImageName);
+        
+        return $newImageName;
+    }
 }

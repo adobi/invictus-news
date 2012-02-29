@@ -229,6 +229,15 @@ class Rumor extends MY_Controller
         redirect($_SERVER['HTTP_REFERER']);
     } 
     
+    public function duplicate()
+    {
+        $this->load->model('Rumors', 'model');
+        
+        $id = $this->model->duplicate($this->uri->segment(3));
+        
+        redirect('rumor/edit/'.$id);
+    }
+    
     private function _deleteImage($id, $withRecord = false) 
     {
         $this->load->model('Rumors', 'model');

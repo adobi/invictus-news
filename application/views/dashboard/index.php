@@ -94,12 +94,25 @@
                             </div>
     
                         </div>                        
-                         -->
                         <p class="item-nav">
                             <a href="<?php echo base_url() ?>rumor/settings/<?php echo $item->id ?>" class="btn primary"><i class="cog"></i>Settings</a>
                             <a href="<?php echo base_url() ?>rumor/edit/<?php echo $item->id ?>" class="btn success"><i class="edit"></i>Edit</a>
                             <a href="<?php echo base_url() ?>rumor/delete/<?php echo $item->id ?>" class="btn"><i class="trash"></i>Delete</a>
                         </p>
+                         -->
+                        <div style="margin: 10px auto 0; width:150px;">
+                            <div class="btn-group" style="display:inline-block; margin:0 auto;">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="list"></i>Select something <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?php echo base_url() ?>rumor/duplicate/<?php echo $item->id ?>"><i class="share"></i>Duplicate</a></li>
+                                    <li><a href="<?php echo base_url() ?>rumor/settings/<?php echo $item->id ?>"><i class="cog"></i>Settings</a></li>
+                                    <li><a href="<?php echo base_url() ?>rumor/edit/<?php echo $item->id ?>"><i class="edit"></i>Edit</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="<?php echo base_url() ?>rumor/delete/<?php echo $item->id ?>"><i class="trash"></i>Delete</a></li>
+                                </ul>
+                            </div>                            
+                        </div>                            
+
                     </div>
                 </div>
             </li>

@@ -1,4 +1,8 @@
-
+<style type="text/css">
+    .label {
+        font-size:1.4em
+    }
+</style>
 
 
 <?php if ($rumor): ?>
@@ -52,6 +56,9 @@
                             <?php else: ?>
                                 <input type="file" name = "image" value = "" />
                             <?php endif ?>
+                            <p class="help-block">The size of the image is <span class="label important">400x400</span> for <strong>phones</strong>, <span class="label important">400x400</span> for <strong>tablets</strong>. <span class="label important">We don't resize it!</span></p>
+            
+                            
                         </div>
                     </fieldset> 
                     <fieldset class="form-actions">
