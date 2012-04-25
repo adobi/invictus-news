@@ -54,4 +54,58 @@ class Bridge extends MY_Model
         
         return $allItems === $completedItems;
     }
+    
+    public function insertForAllPlarforms($data)
+    {
+      if (!$data) return false;
+      
+      $this->load->model('Platforms', 'platforms');
+      
+      $platforms = $this->platforms->fetchAll();
+      
+      if (!$platforms) return false;
+      //dump($data);
+      $imageName = $data['image_name'];
+      $imageUrl = $data['image_url'];
+      unset($data['image_name']);unset($data['image_url']);
+      $error = false;
+      foreach ($platforms as $item) {
+        $data['image'] = $this->_getImageFromUrl($imageUrl, $imageName);
+        $data['platform_id'] = $item->id;
+        $data['game_id'] = 1;
+        
+        if ($data['image']) 
+          $this->insert($data);
+        else {
+          $error = true;
+        }
+      }
+      
+      return !$error;
+    }
+    
+    /** 
+     * get an image from the remote
+     *
+     * @param string $url 
+     * @param string $name 
+     * @return string the name of the loaded image
+     * @author Dobi Attila
+     */
+    private function _getImageFromUrl($url, $name)
+    {
+      
+      if (!$url || !$name) return false;
+      
+      //dump($url); dump($name);
+      $imageBinary = file_get_contents($url);
+      
+      $this->config->load('upload');
+      
+      $image = md5(str_replace(' ', '', microtime())).'_'.$name;
+      file_put_contents($this->config->item('upload_path').$image, $imageBinary);
+      
+      return $image;
+    }
+    
 }

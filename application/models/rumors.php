@@ -208,6 +208,71 @@ class Rumors extends MY_Model
         return $rumorCopyId;
     }
     
+    public function insertFromRemote($data)
+    {
+      if (!$data) return false;
+      
+      $insertData = array(
+        'title'=>$data['title'],
+        'description'=>$data['description'],
+      );
+      
+      $insertData['thumbnail'] = $this->_getImageFromUrl($data['thumbnail'], $data['thumbnail_name']);
+
+      if (!$insertData['thumbnail']) return json_encode(array('message'=>'Image not saved'));
+
+      $inserted = parent::insert($insertData);
+      
+      if (!$inserted) {
+        return json_encode(array('message'=>'News not created'));
+      }
+      
+      /**
+       * insert for all platforms
+       */
+      $this->load->model('Bridge', 'bridge');
+      $forPlatforms = $this->bridge->insertForAllPlarforms(array(
+        'rumor_id'=>$inserted, 
+        'game_id'=>$data['game_id'], 
+        'link_text'=>$data['link_text'], 
+        'link_url'=>$data['link_url'], 
+        'image_url'=>$data['image'],
+        'image_name'=>$data['image_name']
+      ));
+      
+      if ($forPlatforms) {
+          
+        return json_encode(array('insert_id'=>$inserted, 'message'=>'News created'));
+      } else {
+        return json_encode(array('insert_id'=>$inserted, 'message'=>'Problem with platforms'));
+      }
+    }
+    
+    /** 
+     * get an image from the remote
+     *
+     * @param string $url 
+     * @param string $name 
+     * @return string the name of the loaded image
+     * @author Dobi Attila
+     */
+    private function _getImageFromUrl($url, $name)
+    {
+      if ($url && $name) {
+        
+        $imageBinary = file_get_contents($url);
+        
+        $this->config->load('upload');
+        
+        $image = time().'_'.$name;
+        file_put_contents($this->config->item('upload_path').$image, $imageBinary);
+        
+        return $image;
+      } 
+      
+      return false;
+    }
+    
     private function _duplicateImage($image) 
     {
         if (!$image) return false;

@@ -31,4 +31,14 @@ class Api extends MY_Controller
         
         die;
     }
+    
+    public function create()
+    {
+      if ($_POST) {
+        $this->load->model('Rumors', 'rumor');
+
+        echo $this->rumor->insertFromRemote($_POST);
+      }
+      die;
+    }
 }    

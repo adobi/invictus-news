@@ -465,4 +465,21 @@ class My_Model extends CI_Model
 	    
 	    return $result ? $result[0] : false;
 	}
+	
+	public function bulk_insert($data) 
+	{
+	  if (!is_array($data)) return false;
+	  
+	  foreach ($data as $d) {
+	    if ($d)
+	      $this->insert($d);
+	  }
+	  
+	  return true;
+	}	
+	
+	public function truncate() 
+	{
+	  return $this->db->truncate($this->_name);
+	}
 }

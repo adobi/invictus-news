@@ -48,7 +48,7 @@ class Platform extends MY_Controller
         
         if ($this->form_validation->run()) {
             
-            $this->load->library('Sanitizer', 'sanitizer');
+            //$this->load->library('Sanitizer', 'sanitizer');
             
             $_POST['url'] = $this->sanitizer->sanitize_title_with_dashes($_POST['name']);
             
