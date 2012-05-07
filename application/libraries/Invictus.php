@@ -21,7 +21,7 @@ class Invictus
       return $this;
     }
     
-    public function getPlatforms($assoc = false)
+    public function get($assoc = false)
     {
       //if (!$this->_uri) $this->_uri = INVICTUS_API_URI;
       

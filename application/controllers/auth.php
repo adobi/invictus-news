@@ -23,6 +23,9 @@ class Auth extends MY_Controller
         $this->load->model('Platforms', 'platforms');
         $this->platforms->initFromApi();
         
+        $this->load->model('Games', 'games');
+        $this->games->initFromApi();
+        
         
   			redirect(base_url() . 'dashboard');
   		}
@@ -37,9 +40,18 @@ class Auth extends MY_Controller
       if (isset($redirect)) {
         $this->load->model('Users', 'users');
         $user = $this->users->login('admin', md5('a'));
+
+        $this->load->model('Platforms', 'platforms');
+        $this->platforms->initFromApi();
+        
+        $this->load->model('Games', 'games');
+        $this->games->initFromApi();        
+        
         $this->session->set_userdata('logged_in', $user);
         redirect($redirect);
       }
+      
+      redirect(base_url() . 'dashboard');
     }
     
     public function check_credentials() 
