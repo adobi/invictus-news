@@ -37,8 +37,14 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 //define('INVICTUS_API_URI', 'http://invictus.com/api/');
-define('INVICTUS_API_URI', 'http://localhost/invictus.com/app/public/api/');
 
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    
+  define('INVICTUS_API_URI', 'http://localhost/invictus.com/app/public/api/');
+} else {
+    
+  define('INVICTUS_API_URI', 'http://invictus.com//api/');
+}
 
 define('ITEMS_PER_PAGE', 6);
 

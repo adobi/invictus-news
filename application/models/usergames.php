@@ -13,7 +13,7 @@ class Usergames extends MY_Model
             
             return false;
         }
-        
+        /*
         if (!$this->session->userdata('api_loaded')) {
             
             $this->load->library('Api', 'api');
@@ -30,7 +30,7 @@ class Usergames extends MY_Model
             
             $this->session->set_userdata('api_loaded', true);
         }
-
+        */
         
         $result = $this->fetchRows(array(
             'join'=>array(

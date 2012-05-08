@@ -215,6 +215,7 @@ class Rumors extends MY_Model
       $insertData = array(
         'title'=>$data['title'],
         'description'=>$data['description'],
+        'created' => date('Y-m-d H:i:s')
       );
       
       $insertData['thumbnail'] = $this->_getImageFromUrl($data['thumbnail'], $data['thumbnail_name']);
