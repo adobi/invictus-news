@@ -60,7 +60,7 @@ class Rumor extends MY_Controller
         $this->form_validation->set_rules('description', 'Description', 'trim|required|max_length['.DESCRIPTION_MAX_LENGTH.']');
         $this->form_validation->set_rules('games[]', 'Games', 'trim|required');
         $this->form_validation->set_rules('platforms[]', 'Platforms', 'trim|required');
-        
+        $data['file_missing'] = false;
         if ($this->form_validation->run() && (
                 (($item && $item->thumbnail) || ($item && !$item->thumbnail && isset($_FILES['thumbnail']['size']) && $_FILES['thumbnail']['size'] !== 0))
                 || (!$item  && isset($_FILES['thumbnail']['size']) && $_FILES['thumbnail']['size'] !== 0)

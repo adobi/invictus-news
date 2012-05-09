@@ -123,9 +123,32 @@ class Rumors extends MY_Model
     {
         $this->load->model('Games', 'games');
         $this->load->model('Platforms', 'platforms');
+
+        $games = $this->games->fetchAll();
         
-        $game = @$this->games->findBy('url', $game)->id;
-        $platform = @$this->platforms->findBy('url', $platform)->id;
+        $gameRequest = $game;
+        if ($games) {
+          foreach ($games as $item) {
+            if (strpos($game, $item->url) !== false || strpos($item->url, $game) !== false) {
+              $gameRequest = $item->url;
+            }
+          }
+        }
+        
+        $game = @$this->games->findBy('url', $gameRequest)->id;
+        
+        $platforms = $this->platforms->fetchAll();
+        
+        $platformRequest = $platform;
+        if ($platforms) {
+          foreach ($platforms as $item) {
+            if (strpos($platform, $item->url) !== false || strpos($item->url, $platform) !== false) {
+              $platformRequest = $item->url;
+            }
+          }
+        }
+        
+        $platform = @$this->platforms->findBy('url', $platformRequest)->id;
         
         $newsResult = $this->getLatest($game, $platform, $count);
         
@@ -215,7 +238,8 @@ class Rumors extends MY_Model
       $insertData = array(
         'title'=>$data['title'],
         'description'=>$data['description'],
-        'created' => date('Y-m-d H:i:s')
+        'created' => date('Y-m-d H:i:s'),
+        'active'=>$data['make_active']
       );
       
       $insertData['thumbnail'] = $this->_getImageFromUrl($data['thumbnail'], $data['thumbnail_name']);
@@ -232,14 +256,30 @@ class Rumors extends MY_Model
        * insert for all platforms
        */
       $this->load->model('Bridge', 'bridge');
-      $forPlatforms = $this->bridge->insertForAllPlarforms(array(
-        'rumor_id'=>$inserted, 
-        'game_id'=>$data['game_id'], 
-        'link_text'=>$data['link_text'], 
-        'link_url'=>$data['link_url'], 
-        'image_url'=>$data['image'],
-        'image_name'=>$data['image_name']
-      ));
+      
+      if (isset($data['target_games']) && !empty($data['target_games'])) {
+        foreach ($data['target_games'] as $game) {
+          $forPlatforms = $this->bridge->insertForAllPlarforms(array(
+            'rumor_id'=>$inserted, 
+            'game_id'=>$game, 
+            'link_text'=>$data['link_text'], 
+            'link_url'=>$data['link_url'], 
+            'image_url'=>$data['image'],
+            'image_name'=>$data['image_name']
+          ));          
+        }
+      } else {
+      
+        $forPlatforms = $this->bridge->insertForAllPlarforms(array(
+          'rumor_id'=>$inserted, 
+          'game_id'=>$data['game_id'], 
+          'link_text'=>$data['link_text'], 
+          'link_url'=>$data['link_url'], 
+          'image_url'=>$data['image'],
+          'image_name'=>$data['image_name']
+        ));        
+      }
+
       
       if ($forPlatforms) {
           

@@ -59,6 +59,8 @@ class Bridge extends MY_Model
     {
       if (!$data) return false;
       
+      
+      
       $this->load->model('Platforms', 'platforms');
       
       $platforms = $this->platforms->fetchAll();
@@ -72,7 +74,6 @@ class Bridge extends MY_Model
       foreach ($platforms as $item) {
         $data['image'] = $this->_getImageFromUrl($imageUrl, $imageName);
         $data['platform_id'] = $item->id;
-        //$data['game_id'] = ;
         
         if ($data['image']) 
           $this->insert($data);
