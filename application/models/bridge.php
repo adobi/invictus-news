@@ -59,21 +59,23 @@ class Bridge extends MY_Model
     {
       if (!$data) return false;
       
-      
-      
       $this->load->model('Platforms', 'platforms');
       
       $platforms = $this->platforms->fetchAll();
       
       if (!$platforms) return false;
-      //dump($data);
+      
       $imageName = $data['image_name'];
       $imageUrl = $data['image_url'];
-      unset($data['image_name']);unset($data['image_url']);
+      $gameName = $data['game_name'];
+      unset($data['image_name']);unset($data['image_url']); unset($data['game_name']);
       $error = false;
+      $url = $data['link_url'];
       foreach ($platforms as $item) {
         $data['image'] = $this->_getImageFromUrl($imageUrl, $imageName);
         $data['platform_id'] = $item->id;
+        
+        $data['link_url'] = $url . '?utm_source='.urlencode($gameName) . '&utm_medium=In-Game+News&utm_content='.urlencode($item->name).'&utm_campaign='.urlencode($gameName.' Release');
         
         if ($data['image']) 
           $this->insert($data);

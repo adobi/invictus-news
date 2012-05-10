@@ -258,6 +258,9 @@ class Rumors extends MY_Model
       $this->load->model('Bridge', 'bridge');
       
       if (isset($data['target_games']) && !empty($data['target_games'])) {
+        
+        $this->load->model('Games', 'games');
+        
         foreach ($data['target_games'] as $game) {
           $forPlatforms = $this->bridge->insertForAllPlarforms(array(
             'rumor_id'=>$inserted, 
@@ -265,7 +268,8 @@ class Rumors extends MY_Model
             'link_text'=>$data['link_text'], 
             'link_url'=>$data['link_url'], 
             'image_url'=>$data['image'],
-            'image_name'=>$data['image_name']
+            'image_name'=>$data['image_name'],
+            'game_name' =>$this->games->find($game)->name
           ));          
         }
       } else {
@@ -276,7 +280,8 @@ class Rumors extends MY_Model
           'link_text'=>$data['link_text'], 
           'link_url'=>$data['link_url'], 
           'image_url'=>$data['image'],
-          'image_name'=>$data['image_name']
+          'image_name'=>$data['image_name'],
+          'game_name' =>$this->games->find($data['game_id'])->name
         ));        
       }
 
