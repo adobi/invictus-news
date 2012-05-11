@@ -6,6 +6,11 @@ class Bridge extends MY_Model
 {
     protected $_name = "in_bridge";
     protected $_primary = "id";
+
+                    
+    private $bitlyApiKey = 'R_c279e7aa82400801e49fe4b2cf455020';
+    private $login = 'invictusgames';
+    private $format = "json";
     
     /**
      * adott hirhez kerdezi le a hozza tartozo jatekokat, platformokat
@@ -31,8 +36,16 @@ class Bridge extends MY_Model
         //dump($result);
         if (!$result) return false;
         
-        if (!$type) return $result;
+        foreach ($result as $item) {
+          $response = json_decode($this->get_bitly_long_url($item->link_url));
+          $item->bitly_link = $item->link_url;
+          if ($response && $response->status_code === 200 && $response->data->expand[0]->long_url) {
+            
+            $item->link_url = $response->data->expand[0]->long_url;
+          }
+        }
         
+        if (!$type) return $result;
         $return = array();
         foreach ($result as $item) {
             $prop = $type.'_id';
@@ -85,6 +98,37 @@ class Bridge extends MY_Model
       }
       
       return !$error;
+    }
+
+        
+    public function get_bitly_short_url($url) 
+    {
+      if (!$url) return false;
+      
+      $connectURL = 'http://api.bit.ly/v3/shorten?login='.$this->login.'&apiKey='.$this->bitlyApiKey.'&uri='.urlencode($url).'&format='.$this->format;
+      return $this->curl_get_result($connectURL);
+    }
+    
+    /* returns expanded url */
+    public function get_bitly_long_url($url) 
+    {
+      if (!$url) return false;
+      
+      $connectURL = 'http://api.bit.ly/v3/expand?login='.$this->login.'&apiKey='.$this->bitlyApiKey.'&shortUrl='.urlencode($url).'&format='.$this->format;
+      return $this->curl_get_result($connectURL);
+    }
+    
+    /* returns a result form url */
+    private function curl_get_result($url) 
+    {
+      $ch = curl_init();
+      $timeout = 5;
+      curl_setopt($ch,CURLOPT_URL,$url);
+      curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+      curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
+      $data = curl_exec($ch);
+      curl_close($ch);
+      return $data;
     }
     
     /** 

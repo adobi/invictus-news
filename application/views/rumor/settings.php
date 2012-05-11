@@ -36,7 +36,10 @@
                         <label class="control-label" for="link_url">Link url</label>
                         <div class="controls">
                             <input type="text" name = "link_url" id = "link_url" class = "input-xxlarge" value = "<?php echo $item ? ($item->link_url ? $item->link_url : '') : '' ?>" placeholder="http://"/>
-                            <a href="<?php echo $item->link_url ?>" target="_blank">go to link</a>
+                            <a href="<?php echo $item->bitly_link ?>" target="_blank">go to link</a>
+                            <pre style="margin-top:5px; width:522px;">
+<?php echo $item->bitly_link ?>
+                            </pre>
                         </div>
                     </fieldset>  
                     <fieldset class="control-group">
@@ -46,7 +49,7 @@
                                 <ul class="thumbnails">
                                     <li>
                                         <a href="#" class="thumbnail">
-                                            <img src="<?php echo base_url() ?>uploads/original/<?php echo $item->image ?>" alt="" class="thumbnail"/>
+                                            <img src="<?php echo base_url() ?>uploads/original/<?php echo $item->image ?>" alt="" />
                                         </a>
                                     </li>
                                 </ul>

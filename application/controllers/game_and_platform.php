@@ -6,6 +6,7 @@ require_once 'MY_Controller.php';
 
 class Game_and_platform extends MY_Controller 
 {
+
     
     public function __construct()
     {
@@ -59,7 +60,22 @@ class Game_and_platform extends MY_Controller
                     $_POST['link_url'] = 'http://'.$_POST['link_url'];
                 }
                 
-                $this->model->update($_POST, $id);
+                $_POST['link_url'] = preg_replace("/\?.*/", '', $_POST['link_url']);
+                
+                $this->load->model('Games', 'games');
+                $gameName = $this->games->find($item->game_id)->name;
+                $this->load->model('Platforms', 'platforms');
+                $platformName = $this->platforms->find($item->platform_id)->name;
+                $_POST['link_url'] = $_POST['link_url'] . '?utm_source='.urlencode($gameName) . '&utm_medium=In-Game+News&utm_content='.urlencode($platformName).'&utm_campaign='.urlencode($_POST['link_text']);
+
+                $response = json_decode($this->model->get_bitly_short_url($_POST['link_url']));
+                
+                if ($response->status_code === 200) {
+                  
+                  $_POST['link_url'] = $response->data->url;
+  
+                  $this->model->update($_POST, $id);
+                }
                 
                 //$update = 1;
             } else {
@@ -158,5 +174,6 @@ class Game_and_platform extends MY_Controller
         }
         
         return $withRecord ? $this->model->delete($id) : true;
-    }      
+    }   
+
 }

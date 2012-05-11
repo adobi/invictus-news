@@ -28,7 +28,7 @@
                                         nextForms = el.nextAll('form:first');
                                     
                                     nextForms.find('[name=link_text]').val(link);
-                                    nextForms.find('[name=link_url]').val(url);
+                                    nextForms.find('[name=link_url]').val(url.replace(/\?.*/, ''));
                                     
                                     /*nextForms.sisyphus({
                                         timeout: 3,
