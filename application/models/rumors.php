@@ -128,9 +128,14 @@ class Rumors extends MY_Model
         
         $gameRequest = $game;
         if ($games) {
-          foreach ($games as $item) {
-            if (strpos($game, $item->url) !== false || strpos($item->url, $game) !== false) {
-              $gameRequest = $item->url;
+          
+          if ($gameRequest === "roc") 
+            $gameRequest = "race-of-champions";
+          else {
+            foreach ($games as $item) {
+              if (strpos($game, $item->url) !== false || strpos($item->url, $game) !== false) {
+                $gameRequest = $item->url;
+              }
             }
           }
         }
