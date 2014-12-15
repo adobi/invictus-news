@@ -41,10 +41,8 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-//$db['default']['hostname'] = 'roc.invictus.hu';
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-//$db['default']['password'] = '1nv1ctusRocDb';
 $db['default']['password'] = '';
 $db['default']['database'] = 'invictus_news';
 $db['default']['dbdriver'] = 'mysqli';
